@@ -6,7 +6,7 @@ problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense
 
 import csv
 McdonaldsDict = {}
-with open('windows_macdonalds_nutrition.csv') as f:
+with open('windows_macdonalds_nutrition.csv',encoding='cp932') as f:
     #print(f.read())
     reader = csv.DictReader(f)
     #print(reader)
