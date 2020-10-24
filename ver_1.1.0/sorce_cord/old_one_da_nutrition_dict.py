@@ -12,25 +12,14 @@ def old_one_da_nutrition_dict():
     #print(age)
     #print(type(age))  Integer
     #　性別を取得　ここはwebの表現で変えてほしい。
-    gender = map(int,input("あなたの性別を教えてください。　0:man 1:woman  例：あなたが女性の場合　1を選択してください"))
+    gender = map(int,input("あなたの性別を教えてください。　0:man 1:woman  例：あなたが女性の場合1を選択してください\n"))
 
     # 一日に必要な栄養素を取得する。
-    if gender:
-        if age >= 3 and age <= 5:
-            one_da_nutrition_dict ={
-                "エネルギーkcal" : 1300.0,
-                "たんぱく質g" : 25.0 ,
-                "脂質g" : 36.1 ,
-                "炭水化物g" : 186.9 ,
-                "カルシウムmg" : 600.0 ,
-                "鉄mg" : 5.5 ,
-                "ビタミンAμg" : 450.0 ,
-                "ビタミンB1mg" : 1.4 ,
-                "ビタミンB2mg" : 1.6 ,
-                "ビタミンCmg" : 100.0 ,
-                "食物繊維g" : 21.0 ,
-                "食塩相当量g" : 7.5 ,
-                }
-
+    one_da_nutrition_dict={}
+    with open('nutrition_data/old_age_nutrition.csv',encoding='cp932') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            one_da_nutrition_dict[row["年齢"]] = row
+    print(one_da_nutrition_dict)
 
 old_one_da_nutrition_dict()

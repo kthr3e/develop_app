@@ -7,3 +7,4 @@ def get_nutrition_val_list(nutrition_dict, target_menu_list, eiyou_name):
         eiyou_val = nutrition_dict[menu_name][eiyou_name]
         result_list.append(float(eiyou_val))
     return result_list
+    

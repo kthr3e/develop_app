@@ -1,6 +1,7 @@
 from datetime import date
 import csv
 
+# 年齢と性別を表示して。
 def calculate_age(year, month, day):
     """年齢を返す"""
     born = date(year, month, day)  # あなたの誕生日
