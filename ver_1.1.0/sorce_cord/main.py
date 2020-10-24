@@ -8,7 +8,7 @@ def main():
 
     import csv
     McdonaldsDict = {}
-    with open('nutrition_data/windows_macdonalds_nutrition.csv') as f:
+    with open('nutrition_data/windows_macdonalds_nutrition.csv',,encoding='cp932') as f:
         #print(f.read())
         reader = csv.DictReader(f)
         #print(reader)
@@ -101,9 +101,9 @@ def main():
     problem += pulp.lpDot(eiyou_data["食塩相当量g"], xs) <= one_da_nutrition_dict["食塩相当量g"]
 
     #与えられた問題の内容を表示
-    print(problem)
+    #print(problem)
     status = problem.solve()
-    print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
+    #print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
 
     #簡易結果表示
     #print([x.value() for x in xs])
