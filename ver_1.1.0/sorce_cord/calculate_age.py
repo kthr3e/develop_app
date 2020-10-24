@@ -1,5 +1,5 @@
 from datetime import date
-
+import csv
 
 def calculate_age(year, month, day):
     """年齢を返す"""
