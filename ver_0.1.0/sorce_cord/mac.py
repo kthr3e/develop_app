@@ -93,7 +93,7 @@ for key in one_da_nutrition_dict.keys():
 #lowBoundで0から∞まで
 #catで変数の種類指定
 xs = [pulp.LpVariable('{}'.format(x), cat = 'Integer', lowBound = 0) for x in target_menu_list]
-print("xs:",xs)
+# print("xs:",xs)
 
 # 目的関数：カロリーを最小化
 # lpdot:二つのリストのない席を求める。
@@ -115,18 +115,19 @@ problem += pulp.lpDot(eiyou_data["食物繊維g"], xs) >= one_da_nutrition_dict[
 problem += pulp.lpDot(eiyou_data["食塩相当量g"], xs) <= one_da_nutrition_dict["食塩相当量g"]
 
 #与えられた問題の内容を表示
-print(problem)
+# print(problem)
 status = problem.solve()
-print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
+# print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
 
 #簡易結果表示
-#print([x.value() for x in xs])
+print([x.value() for x in xs])
 #print(problem.objective.value())
 
 #　変数名ごとに表示
 print("「一日に必要な栄養素を摂取するには」")
 for x in xs:
-    print(str(x),":",str(int(x.value())),"個")
+    if int(x.value())!= 0:
+        print(str(x),":",str(int(x.value())),"個")
 print("\n")
 # それぞれの栄養素がいくらか
 print("栄養素の値")
