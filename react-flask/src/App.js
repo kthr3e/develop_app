@@ -1,9 +1,11 @@
 import './App.css';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 function App() {
     const { register, reset, handleSubmit } = useForm();
+    const [value, set_value] = useState();
 
     const handle_submit = async (data) => {
         try {
@@ -12,6 +14,7 @@ function App() {
             });
             reset();
             console.log(res);
+            set_value(res);
         } catch (res) {
             console.log(res);
         }
@@ -22,6 +25,8 @@ function App() {
                 <input type="text" name="text" ref={register} />
                 <button type="submit">送信</button>
             </form>
+            <ul>{value && value.data[0].map((el) => <li>{el}</li>)}</ul>
+            <ul>{value && Object.values(value.data[1]).map((el) => <li>{el}</li>)}</ul>
         </div>
     );
 }

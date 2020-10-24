@@ -3,6 +3,7 @@ from flask import request, make_response, jsonify
 from flask_cors import CORS
 import csv
 import pulp
+import os
 
 app = Flask(__name__, static_folder="./build/static", template_folder="./build")
 CORS(app) #Cross Origin Resource Sharing
@@ -14,7 +15,7 @@ def index():
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
     McdonaldsDict = {}
-    with open('/Users/nozomu/react-flask/server/windows_macdonalds_nutrition.csv',encoding='cp932') as f:
+    with open(os.getcwd()+'/server/windows_macdonalds_nutrition.csv',encoding='cp932') as f:
         #print(f.read())
         reader = csv.DictReader(f)
         #print(reader)
@@ -133,11 +134,11 @@ def index():
 
     #　変数名ごとに表示
     print("「一日に必要な栄養素を摂取するには」")
-    response1={}
+    response1=[]
     for x in xs:
         if int(x.value())!= 0:
             print(str(x),":",str(int(x.value())),"個")
-            response1[x]=str(x)+":"+str(int(x.value()))+"個"
+            response1.append(str(x)+":"+str(int(x.value()))+"個")
     print("\n")
     # それぞれの栄養素がいくらか
     print("栄養素の値")
