@@ -3,9 +3,9 @@ from get_nutrition_val_list import get_nutrition_val_list
 from flask import Flask,make_response, jsonify
 import csv
 # flaskの設定
-app = Flask(__name__)
+#app = Flask(__name__)
 
-@app.route('/')
+#@app.route('/')
 
 
 def main():
@@ -133,5 +133,3 @@ def main():
 # python main.pyで実行されたときだけ動くようにする。
 if  __name__ == "__main__":		# importされると"__main__"は入らないので，実行かimportかを判断できる．
 	main()    # メイン関数を実行
-    #app.debug = True
-    #app.run()
