@@ -15,7 +15,7 @@ def main():
 
 
     McdonaldsDict = {}
-    with open('nutrition_data/windows_macdonalds_nutrition.csv',encoding='cp932') as f:
+    with open('nutrition_data/macdonalds_nutrition.csv',encoding='cp932') as f:
         #print(f.read())
         reader = csv.DictReader(f)
         #print(reader)
