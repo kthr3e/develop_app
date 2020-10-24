@@ -20,13 +20,44 @@ function App() {
         }
     };
     return (
-        <div className="App">
+        <div
+            className="App"
+            style={{
+                marginTop: 200,
+                display: 'flex',
+                justifyContent: 'space-evenly',
+            }}
+        >
             <form onSubmit={handleSubmit(handle_submit)}>
                 <input type="text" name="text" ref={register} />
                 <button type="submit">送信</button>
             </form>
-            <ul>{value && value.data[0].map((el) => <li>{el}</li>)}</ul>
-            <ul>{value && Object.values(value.data[1]).map((el) => <li>{el}</li>)}</ul>
+            <table border="1">
+                <tr>
+                    <th>メニュー</th>
+                    <th>個数</th>
+                </tr>
+                {value &&
+                    Object.entries(value.data[0]).map((el) => (
+                        <tr>
+                            <td>{el[0]}</td>
+                            <td>{el[1]}</td>
+                        </tr>
+                    ))}
+            </table>
+            <table border="1">
+                <tr>
+                    <th>栄養素</th>
+                    <th>量</th>
+                </tr>
+                {value &&
+                    Object.entries(value.data[1]).map((el) => (
+                        <tr>
+                            <td>{el[0]}</td>
+                            <td>{el[1]}</td>
+                        </tr>
+                    ))}
+            </table>
         </div>
     );
 }

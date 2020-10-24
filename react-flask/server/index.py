@@ -134,18 +134,18 @@ def index():
 
     #　変数名ごとに表示
     print("「一日に必要な栄養素を摂取するには」")
-    response1=[]
+    response1={}
     for x in xs:
         if int(x.value())!= 0:
             print(str(x),":",str(int(x.value())),"個")
-            response1.append(str(x)+":"+str(int(x.value()))+"個")
+            response1[str(x)]=str(int(x.value()))+"個"
     print("\n")
     # それぞれの栄養素がいくらか
     print("栄養素の値")
     response2={}
     for key in one_da_nutrition_dict:
         print(key,":",str(one_da_nutrition_dict[key]),"に対し",str(round(pulp.lpDot(eiyou_data[key],xs).value())))
-        response2[key]=key+":"+str(one_da_nutrition_dict[key])+"に対し"+str(round(pulp.lpDot(eiyou_data[key],xs).value()))
+        response2[key]=str(one_da_nutrition_dict[key])+"に対し"+str(round(pulp.lpDot(eiyou_data[key],xs).value()))
     return make_response(jsonify(response1,response2))
 
 
