@@ -1,6 +1,10 @@
 import pulp
 from get_nutrition_val_list import get_nutrition_val_list
-
+from flask import Flask
+import sys
+app = Flank(__name__)
+sys.path.append("D:\github\develop_app\ver_1.1.0\sorce_cord")
+@app.route('/')
 def main():
     #問題の定義　最小化か最大化か　
     # 今回はカロリーを最小化したい。
@@ -8,7 +12,7 @@ def main():
 
     import csv
     McdonaldsDict = {}
-    with open('nutrition_data/windows_macdonalds_nutrition.csv',,encoding='cp932') as f:
+    with open('nutrition_data/windows_macdonalds_nutrition.csv',encoding='cp932') as f:
         #print(f.read())
         reader = csv.DictReader(f)
         #print(reader)
