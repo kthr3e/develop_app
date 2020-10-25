@@ -2,6 +2,15 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import styled from 'styled-components';
+import {
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+} from '@material-ui/core';
 
 type FormData = {
     text: string;
@@ -33,32 +42,44 @@ export default function Home() {
                 <input type="text" name="text" ref={register} />
                 <button type="submit">送信</button>
             </form>
-            <table>
-                <tr>
-                    <th>メニュー</th>
-                    <th>個数</th>
-                </tr>
-                {value &&
-                    Object.entries(value.data[0]).map((el) => (
-                        <tbody>
-                            <td>{el[0]}</td>
-                            <td>{el[1]}</td>
-                        </tbody>
-                    ))}
-            </table>
-            <table>
-                <thead>
-                    <th>栄養素</th>
-                    <th>量</th>
-                </thead>
-                {value &&
-                    Object.entries(value.data[1]).map((el) => (
-                        <tr>
-                            <td>{el[0]}</td>
-                            <td>{el[1]}</td>
-                        </tr>
-                    ))}
-            </table>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>メニュー</TableCell>
+                            <TableCell>個数</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {value &&
+                            Object.entries(value.data[0]).map((el) => (
+                                <TableRow>
+                                    <TableCell>{el[0]}</TableCell>
+                                    <TableCell>{el[1]}</TableCell>
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>栄養素</TableCell>
+                            <TableCell>量</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {value &&
+                            Object.entries(value.data[1]).map((el) => (
+                                <TableRow>
+                                    <TableCell>{el[0]}</TableCell>
+                                    <TableCell>{el[1]}</TableCell>
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Container>
     );
 }
