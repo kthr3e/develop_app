@@ -1,64 +1,55 @@
-import React from 'react'
-import NextDocument, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-  DocumentInitialProps
-} from 'next/document'
-import { RenderPageResult } from 'next/dist/next-server/lib/utils'
-import { ServerStyleSheet } from 'styled-components'
-import { ServerStyleSheets as MaterialServerStyleSheets } from '@material-ui/core'
+import Document, {
+    DocumentContext,
+    Html,
+    Head,
+    Main,
+    NextScript,
+} from 'next/document';
+import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
+import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/styles';
 
-export default class CustomDocument extends NextDocument {
-  static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps> {
-    const styledComponentsSheet = new ServerStyleSheet()
-    const materialUiSheets = new MaterialServerStyleSheets()
-    const originalRenderPage = ctx.renderPage
+export default class MyDocument extends Document {
+    static async getInitialProps(ctx: DocumentContext) {
+        const styledComponentSheets = new StyledComponentSheets();
+        const materialUiServerStyleSheets = new MaterialUiServerStyleSheets();
+        const originalRenderPage = ctx.renderPage;
 
-    try {
-      ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
-        originalRenderPage({
-          enhanceApp: (App) => (
-            props
-          ): React.ReactElement<{
-            sheet: ServerStyleSheet
-          }> =>
-            styledComponentsSheet.collectStyles(
-              materialUiSheets.collect(<App {...props} />)
-            )
-        })
+        try {
+            ctx.renderPage = () =>
+                originalRenderPage({
+                    enhanceApp: (App) => (props) =>
+                        styledComponentSheets.collectStyles(
+                            materialUiServerStyleSheets.collect(
+                                <App {...props} />
+                            )
+                        ),
+                });
 
-      const initialProps = await NextDocument.getInitialProps(ctx)
-      return {
-        ...initialProps,
-        styles: [
-          <React.Fragment key="styles">
-            {initialProps.styles}
-            {styledComponentsSheet.getStyleElement()}
-            {materialUiSheets.getStyleElement()}
-          </React.Fragment>
-        ]
-      }
-    } finally {
-      styledComponentsSheet.seal()
+            const initialProps = await Document.getInitialProps(ctx);
+            return {
+                ...initialProps,
+                styles: (
+                    <>
+                        {initialProps.styles}
+                        {styledComponentSheets.getStyleElement()}
+                        {materialUiServerStyleSheets.getStyleElement()}
+                    </>
+                ),
+            };
+        } finally {
+            styledComponentSheets.seal();
+        }
     }
-  }
 
-  render(): React.ReactElement {
-    return (
-      <Html lang="ja-JP">
-        <Head>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
+    render() {
+        return (
+            <Html lang="en">
+                <Head />
+                <body>
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+        );
+    }
 }
