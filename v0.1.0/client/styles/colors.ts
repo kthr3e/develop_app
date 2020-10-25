@@ -10,6 +10,7 @@ export const COLOR = {
   PINK: '#FFC0CB',
   BROWN: '#A52A2A',
   WHITE: '#FFFFFF',
+  SMOKE: '#F5F5F5',
   GRAY: '#808080',
   BLACK: '#000000',
 };

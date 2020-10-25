@@ -6,6 +6,8 @@ import { StylesProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { theme } from '../styles/theme';
 import '../styles/global.scss';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { ElevationScroll } from '../components/ElevationScroll';
 
 export default function App({ Component, pageProps }: AppProps) {
     // Remove the server-side injected CSS.(https://material-ui.com/guides/server-rendering/)
@@ -21,6 +23,15 @@ export default function App({ Component, pageProps }: AppProps) {
             <MaterialUIThemeProvider theme={theme}>
                 <StyledComponentsThemeProvider theme={theme}>
                     <CssBaseline />
+                    <ElevationScroll {...pageProps}>
+                        <AppBar>
+                            <Toolbar>
+                                <Typography variant="h6">
+                                    栄養診断App v0.1.0
+                                </Typography>
+                            </Toolbar>
+                        </AppBar>
+                    </ElevationScroll>
                     <Component {...pageProps} />
                 </StyledComponentsThemeProvider>
             </MaterialUIThemeProvider>
