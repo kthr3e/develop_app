@@ -10,7 +10,7 @@ type ResData = {
     data: { [name: string]: string };
 };
 
-export default function App() {
+export default function Home() {
     const { register, reset, handleSubmit } = useForm();
     const [value, set_value] = useState<ResData>();
 
@@ -28,7 +28,6 @@ export default function App() {
     };
     return (
         <div
-            className="App"
             style={{
                 marginTop: 200,
                 display: 'flex',
