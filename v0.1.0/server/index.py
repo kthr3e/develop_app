@@ -15,7 +15,7 @@ def index():
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
     McdonaldsDict = {}
-    with open(os.getcwd()+'/server/windows_macdonalds_nutrition.csv',encoding='cp932') as f:
+    with open(os.getcwd()+'/windows_macdonalds_nutrition.csv',encoding='cp932') as f:
         #print(f.read())
         reader = csv.DictReader(f)
         #print(reader)
