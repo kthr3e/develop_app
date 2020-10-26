@@ -1,5 +1,5 @@
+#これは使わなくなった。
 from datetime import date
-import csv
 
 # 年齢と性別を表示して。
 def calculate_age(year, month, day):
