@@ -8,7 +8,7 @@ def main():
 
     import csv
     McdonaldsDict = {}
-    with open('nutrition_data/windows_macdonalds_nutrition.csv') as f:
+    with open('nutrition_data/windows_macdonalds_nutrition.csv',encoding='cp932') as f:
         #print(f.read())
         reader = csv.DictReader(f)
         #print(reader)
@@ -72,7 +72,7 @@ def main():
         "食物繊維g" : 21.0 ,
         "食塩相当量g" : 7.5 ,
         }
-
+    print("one_da_nutrition_dict:",one_da_nutrition_dict)
     # 対象とする栄養素について、対象の商品リストごとの栄養価を、リスト形式で作成する
     eiyou_data = {}
     for key in one_da_nutrition_dict.keys():

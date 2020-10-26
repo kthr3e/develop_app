@@ -2,6 +2,7 @@ import pulp
 from get_nutrition_val_list import get_nutrition_val_list
 from flask import Flask,make_response, jsonify
 import csv
+from old_one_da_nutrition_dict import old_one_da_nutrition_dict
 # flaskの設定
 #app = Flask(__name__)
 
@@ -26,7 +27,7 @@ def main():
             McdonaldsDict[row["商品名"]] = row
             # print(row,'\n')
 
-    print("wx: ",McdonaldsDict)
+    #print("wx: ",McdonaldsDict)
 
     # メニューリスト
     target_menu_list = [
@@ -59,21 +60,9 @@ def main():
     "ミニッツメイドオレンジ",
     ]
 
-
-    one_da_nutrition_dict ={
-        "エネルギー[kcal]" : 2650.0,
-        "たんぱく質[g]" : 65.0 ,
-        "脂質[g]" : 73.6 ,
-        "炭水化物[g]" : 380.9 ,
-        "カルシウム[mg]" : 800.0 ,
-        "鉄[mg]" : 7.5 ,
-        "ビタミンA[μg]" : 850.0 ,
-        "ビタミンB1[mg]" : 1.4 ,
-        "ビタミンB2[mg]" : 1.6 ,
-        "ビタミンC[mg]" : 100.0 ,
-        "食物繊維[g]" : 21.0 ,
-        "食塩相当量[g]" : 7.5 ,
-    }
+    gender,old = map(int,input().split())
+    one_da_nutrition_dict = old_one_da_nutrition_dict(gender,old)
+    #print("one_da_nutrition_dict:",one_da_nutrition_dict)
 
     # 対象とする栄養素について、対象の商品リストごとの栄養価を、リスト形式で作成する
     eiyou_data = {}
@@ -95,17 +84,17 @@ def main():
     #制約条件：　一日に必要内容量をそれぞれ満たすこと
     # 条件カスタマイズ＆ON-OFFしやすいように、あえてループ外で起債。
     #食塩相当については、「以内」としている。解が存在スカは要注意
-    problem += pulp.lpDot(eiyou_data["たんぱく質[g]"], xs) >= one_da_nutrition_dict["たんぱく質[g]"]
-    problem += pulp.lpDot(eiyou_data["脂質[g]"], xs) >= one_da_nutrition_dict["脂質[g]"]
-    problem += pulp.lpDot(eiyou_data["炭水化物[g]"], xs) >= one_da_nutrition_dict["炭水化物[g]"]
-    problem += pulp.lpDot(eiyou_data["カルシウム[mg]"], xs) >= one_da_nutrition_dict["カルシウム[mg]"]
-    problem += pulp.lpDot(eiyou_data["鉄[mg]"], xs) >= one_da_nutrition_dict["鉄[mg]"]
-    problem += pulp.lpDot(eiyou_data["ビタミンA[μg]"], xs) >= one_da_nutrition_dict["ビタミンA[μg]"]
-    problem += pulp.lpDot(eiyou_data["ビタミンB1[mg]"], xs) >= one_da_nutrition_dict["ビタミンB1[mg]"]
-    problem += pulp.lpDot(eiyou_data["ビタミンB2[mg]"], xs) >= one_da_nutrition_dict["ビタミンB2[mg]"]
-    problem += pulp.lpDot(eiyou_data["ビタミンC[mg]"], xs) >= one_da_nutrition_dict["ビタミンC[mg]"]
-    problem += pulp.lpDot(eiyou_data["食物繊維[g]"], xs) >= one_da_nutrition_dict["食物繊維[g]"]
-    problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= one_da_nutrition_dict["食塩相当量[g]"]
+    problem += pulp.lpDot(eiyou_data["たんぱく質[g]"], xs) >= float(one_da_nutrition_dict["たんぱく質[g]"])
+    problem += pulp.lpDot(eiyou_data["脂質[g]"], xs) >= float(one_da_nutrition_dict["脂質[g]"])
+    problem += pulp.lpDot(eiyou_data["炭水化物[g]"], xs) >= float(one_da_nutrition_dict["炭水化物[g]"])
+    problem += pulp.lpDot(eiyou_data["カルシウム[mg]"], xs) >= float(one_da_nutrition_dict["カルシウム[mg]"])
+    problem += pulp.lpDot(eiyou_data["鉄[mg]"], xs) >= float(one_da_nutrition_dict["鉄[mg]"])
+    problem += pulp.lpDot(eiyou_data["ビタミンA[μg]"], xs) >= float(one_da_nutrition_dict["ビタミンA[μg]"])
+    problem += pulp.lpDot(eiyou_data["ビタミンB1[mg]"], xs) >= float(one_da_nutrition_dict["ビタミンB1[mg]"])
+    problem += pulp.lpDot(eiyou_data["ビタミンB2[mg]"], xs) >= float(one_da_nutrition_dict["ビタミンB2[mg]"])
+    problem += pulp.lpDot(eiyou_data["ビタミンC[mg]"], xs) >= float(one_da_nutrition_dict["ビタミンC[mg]"])
+    problem += pulp.lpDot(eiyou_data["食物繊維[g]"], xs) >= float(one_da_nutrition_dict["食物繊維[g]"])
+    problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= float(one_da_nutrition_dict["食塩相当量[g]"])
 
     #与えられた問題の内容を表示
     #print(problem)
