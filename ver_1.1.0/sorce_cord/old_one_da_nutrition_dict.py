@@ -7,7 +7,7 @@
 import csv
 import pandas as pd
 
-def old_one_da_nutrition_dict():
+def old_one_da_nutrition_dict(gender = 1):
     # 年齢を取得
     #year,month,day = map(int,input("あなたの生年月日を入力してください　例：1998/09/01\n").split("/"))
     #age = calculate_age(year,month,day)
@@ -16,25 +16,28 @@ def old_one_da_nutrition_dict():
     #gender = map(int,input("あなたの性別を教えてください。　0:man 1:woman  例：あなたが女性の場合1を選択してください\n"))
     #old = map(int,input("あなたの年齢を入力してください。\n"))
     # 一日に必要な栄養素を取得する。
+    one_da_nutrition_dict = {}
+    old_category = 0
+    if gender:
+        with open('nutrition_data/woman_old_age_nutrition.csv',encoding='cp932') as f:
+            #lst = pd.read_csv(f).values.tolist()
+            #print(lst)
+            reader = csv.DictReader(f)
+            #print(reader)
+            for row in reader:
+                one_da_nutrition_dict[old_category] = row
+                old_category += 1
+    else:
+        with open('nutrition_data/man_old_age_nutrition.csv') as f:
+            #lst = pd.read_csv(f).values.tolist()
+            #print(lst)
+            reader = csv.DictReader(f)
+            #print(reader)
+            for row in reader:
+                one_da_nutrition_dict[old_category] = row
+                old_category += 1
 
-    man_one_da_nutrition_dict={}
-    woman_one_da_nutrition_dict={}
-    with open('nutrition_data/old_age_nutrition.csv',encoding='cp932') as f:
-        #lst = pd.read_csv(f).values.tolist()
-        #print(lst)
-        reader = csv.DictReader(f)
-        #print(reader)
-        for row in reader:
-            #print("row:",row)
-            #print("row[]:",row["性別"])
-            #男女別でcsvを分ける。
-            if row["性別"] == "man":
-                man_one_da_nutrition_dict[row["年齢"]] = row
-
-            else :
-                woman_one_da_nutrition_dict[row["年齢"]] = row
-    print(man_one_da_nutrition_dict)
-    #print(woman_one_da_nutrition_dict)
+    print( one_da_nutrition_dict["2"])
 
 
 old_one_da_nutrition_dict()

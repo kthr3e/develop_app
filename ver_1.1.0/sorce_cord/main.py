@@ -26,7 +26,7 @@ def main():
             McdonaldsDict[row["商品名"]] = row
             # print(row,'\n')
 
-    #print(McdonaldsDict)
+    print("wx: ",McdonaldsDict)
 
     # メニューリスト
     target_menu_list = [
@@ -86,7 +86,7 @@ def main():
     #lowBoundで0から∞まで
     #catで変数の種類指定
     xs = [pulp.LpVariable('{}'.format(x), cat = 'Integer', lowBound = 0) for x in target_menu_list]
-    print("xs:",xs)
+    #print("xs:",xs)
 
     # 目的関数：カロリーを最小化
     # lpdot:二つのリストのない席を求める。
