@@ -20,27 +20,29 @@ def index():
         return """
         性別と年齢を選択してください。
         <form action="/" method = "POST">
-        <select name="性別">
+        <select name="gender">
         <option value="0">男性</option>
         <option value="1">女性</option>
         </select>
-        <select name="年齢">
+        <select name="old">
         <option value="0">3-5歳</option>
         <option value="1">6-7</option>
-        <option value="1">8-9</option>
-        <option value="1">10-11</option>
-        <option value="1">12-14</option>
-        <option value="1">15-17</option>
-        <option value="1">18-29</option>
-        <option value="1">30-49</option>
-        <option value="1">50-64</option>
-        <option value="1">65-74</option>
-        <option value="1">75歳以上</option>
+        <option value="2">8-9</option>
+        <option value="3">10-11</option>
+        <option value="4">12-14</option>
+        <option value="5">15-17</option>
+        <option value="6">18-29</option>
+        <option value="7">30-49</option>
+        <option value="8">50-64</option>
+        <option value="9">65-74</option>
+        <option value="10">75歳以上</option>
+        <input type="submit">
         </select>
         </form>
         """
 
     else:
+        # error構文を追加　もしGETが正常じゃないとき
         try:
             #問題の定義　最小化か最大化か　
             # 今回はカロリーを最小化したい。
@@ -48,7 +50,7 @@ def index():
 
 
             McdonaldsDict = {}
-            with open(os.getcwd()+'nutrition_data/macdonalds_nutrition.csv',encoding='cp932') as f:
+            with open(os.getcwd()+'/nutrition_data/macdonalds_nutrition.csv',encoding='cp932') as f:
                 reader = csv.DictReader(f)
                 # OrderedDict([('商品名', 'えびフィレオ'), ('重量g', '174'), ・・・が１行ごとに入っている
                 # ※ジュース系などで、栄養価が「-」のものは０を置換済み
@@ -87,7 +89,10 @@ def index():
             "ミニッツメイドオレンジ",
             ]
 
-            gender,old = map(int,input().split())
+            gender = int(request.form["gender"])
+            old = int(request.form["old"])
+            print("gender:",gender,"old:",old)
+            #gender,old = map(int,input().split())
             one_da_nutrition_dict = old_one_da_nutrition_dict(gender,old)
             #print("one_da_nutrition_dict:",one_da_nutrition_dict)
 
@@ -133,21 +138,20 @@ def index():
             #print(problem.objective.value())
 
             #　変数名ごとに表示
-            print("「一日に必要な栄養素を摂取するには」")
             one_da_neces_nutrition={}
             for x in xs:
                 #print(str(x),":",str(int(x.value())),"個")
                 one_da_neces_nutrition[str(x)]=str(int(x.value()))+"個"
 
-            print("\n")
+
             # それぞれの栄養素がいくらか
-            print("栄養素の値")
-            nutrition_value={}
+            # nutrition_comp 一日に必要な栄養素の比較
+            nutrition_comp={}
             for key in one_da_nutrition_dict:
                 print(key,":",str(one_da_nutrition_dict[key]),"に対し",str(round(pulp.lpDot(eiyou_data[key],xs).value())))
-                nutrition_data[key]=str(one_da_nutrition_dict[key])+"に対し"+str(round(pulp.lpDot(eiyou_data[key],xs).value()))
+                nutrition_comp[key]=str(one_da_nutrition_dict[key])+"に対し"+str(round(pulp.lpDot(eiyou_data[key],xs).value()))
 
-            return make_responce(jsonfy(one_da_neces_nutrition,nutrition_value))
+            return one_da_neces_nutrition,nutrition_comp
 
 
         except:
@@ -157,6 +161,6 @@ def index():
 
 
 # python main.pyで実行されたときだけ動くようにする。
-if  __name__ == "__index__":		# importされると"__index__"は入らないので，実行かimportかを判断できる．
+if  __name__ == "__main__":		# importされると"__main__"は入らないので，実行かimportかを判断できる．
     app.debug = True
     app.run(host='localhost', port=5000)
