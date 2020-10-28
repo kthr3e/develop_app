@@ -109,10 +109,7 @@ def index():
             #LpVariableで自由辺巣を作成。値は-∞から∞まで
             #lowBoundで0から∞まで
             #catで変数の種類指定
-<<<<<<< HEAD
             # 商品の上限指定　
-=======
->>>>>>> e1c87f6a651dc29c8a862dace48b42a3fa0b70b8
             up_value = int(request.form["up_value"])
             print("up_value:",up_value)
             xs = up_limit(target_menu_list,up_value)
