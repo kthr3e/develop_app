@@ -7,6 +7,8 @@ import os
 # 関数呼び出し
 from get_nutrition_val_list import get_nutrition_val_list
 from old_one_da_nutrition_dict import old_one_da_nutrition_dict
+from up_limit import up_limit
+
 
 # flaskの設定
 # Flaskオブジェクトの生成
@@ -24,6 +26,7 @@ def index():
         <option value="0">男性</option>
         <option value="1">女性</option>
         </select>
+        <br>
         <select name="old">
         <option value="0">3-5歳</option>
         <option value="1">6-7歳</option>
@@ -91,7 +94,7 @@ def index():
 
             gender = int(request.form["gender"])
             old = int(request.form["old"])
-            print("gender:",gender,"old:",old)
+            #print("gender:",gender,"old:",old)
             #gender,old = map(int,input().split())
             one_da_nutrition_dict = old_one_da_nutrition_dict(gender,old)
             #print("one_da_nutrition_dict:",one_da_nutrition_dict)
@@ -106,7 +109,10 @@ def index():
             #LpVariableで自由辺巣を作成。値は-∞から∞まで
             #lowBoundで0から∞まで
             #catで変数の種類指定
-            xs = [pulp.LpVariable('{}'.format(x), cat = 'Integer', lowBound = 0) for x in target_menu_list]
+            # 商品の上限指定　
+            up_value = int(request.form["up_value"])
+            print("up_value:",up_value)
+            xs = up_limit(target_menu_list,up_value)
             #print("xs:",xs)
 
             # 目的関数：カロリーを最小化
