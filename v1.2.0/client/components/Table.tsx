@@ -24,7 +24,9 @@ export const Table: FC<Props> = ({ value, headers }) => {
                 <StyledTableHead>
                     <TableRow>
                         {headers.map((header) => (
-                            <TableCell align="center">{header}</TableCell>
+                            <TableCell align="center" key={String(header)}>
+                                {header}
+                            </TableCell>
                         ))}
                     </TableRow>
                 </StyledTableHead>
@@ -47,5 +49,5 @@ const StyledTableContainer = styled(TableContainer)<any>`
 `;
 
 const StyledTableHead = styled(TableHead)`
-    background-color: ${COLOR.SMOKE}
+    background-color: ${COLOR.SMOKE};
 `;

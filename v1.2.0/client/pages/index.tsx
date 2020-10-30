@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Table } from '../components/Table';
 import {
@@ -10,6 +10,7 @@ import {
     DialogTitle,
     FormControlLabel,
     FormLabel,
+    Input,
     InputLabel,
     MenuItem,
     Radio,
@@ -22,7 +23,8 @@ import { Controller, useForm } from 'react-hook-form';
 
 type FormData = {
     gender: string;
-    age: string;
+    old: string;
+    up_value: string;
 };
 
 type ResData = {
@@ -33,7 +35,7 @@ export default function Home() {
     const [value, set_value] = useState<ResData | null>(null);
     const [open, set_open] = useState(false);
     const [loading, set_loading] = useState(false);
-    const { control, reset, handleSubmit, errors } = useForm<FormData>();
+    const { control, reset, handleSubmit, errors, register } = useForm<FormData>();
 
     const handle_open = () => {
         set_open(true);
@@ -47,12 +49,16 @@ export default function Home() {
         set_open(false);
     };
 
+    /**
+     *
+     * @param data gender: number,age: number
+     * @desc index.pyのindexが実行
+     */
     const handle_submit = async (data: FormData) => {
-        console.log(data);
         set_loading(true);
         try {
-            const res = await axios.post('http://localhost:5000', {
-                post_text: data,
+            const res = await axios.post('http://localhost:5000/macdonalds', {
+                data
             });
             console.log(res);
             set_value(res);
@@ -64,6 +70,11 @@ export default function Home() {
             set_loading(false);
         }
     };
+
+    /**
+     * valueがない時はTOPページを表示
+     * ある時は診断結果を表示
+     */
     return value ? (
         <Container>
             <h1>診断結果</h1>
@@ -88,7 +99,7 @@ export default function Home() {
                 早速診断する！
             </Button>
             <Dialog open={open} onClose={handle_close}>
-                <DialogTitle>性別と年齢を選択してください</DialogTitle>
+                <DialogTitle>項目を選択してください</DialogTitle>
                 <form onSubmit={handleSubmit(handle_submit)}>
                     <DialogContent>
                         <Column>
@@ -99,17 +110,17 @@ export default function Home() {
                                 defaultValue=""
                                 rules={{ required: '性別を選択してください' }}
                                 as={
-                                    <RadioGroup name="gender1">
+                                    <RadioGroup>
                                         <Row>
                                             <FormControlLabel
-                                                value="male"
+                                                value="0"
                                                 control={
                                                     <Radio color="primary" />
                                                 }
                                                 label="男性"
                                             />
                                             <FormControlLabel
-                                                value="female"
+                                                value="1"
                                                 control={<Radio />}
                                                 label="女性"
                                             />
@@ -129,7 +140,7 @@ export default function Home() {
                                 年齢
                             </InputLabel>
                             <Controller
-                                name="age"
+                                name="old"
                                 control={control}
                                 defaultValue=""
                                 rules={{ required: '年齢を選択してください' }}
@@ -137,21 +148,36 @@ export default function Home() {
                                     <StyledSelect
                                         labelId="demo-dialog-select-label"
                                         id="demo-dialog-select"
+                                        placeholder="年齢"
                                     >
-                                        <MenuItem value={10}>10代</MenuItem>
-                                        <MenuItem value={20}>20代</MenuItem>
-                                        <MenuItem value={30}>30代</MenuItem>
+                                        <MenuItem value="0">3-5歳</MenuItem>
+                                        <MenuItem value="1">6-7歳</MenuItem>
+                                        <MenuItem value="2">8-9歳</MenuItem>
+                                        <MenuItem value="3">10-11歳</MenuItem>
+                                        <MenuItem value="4">12-14歳</MenuItem>
+                                        <MenuItem value="5">15-17歳</MenuItem>
+                                        <MenuItem value="6">18-29歳</MenuItem>
+                                        <MenuItem value="7">30-49歳</MenuItem>
+                                        <MenuItem value="8">50-64歳</MenuItem>
+                                        <MenuItem value="9">65-74歳</MenuItem>
+                                        <MenuItem value="10">75歳以上</MenuItem>
                                     </StyledSelect>
                                 }
                             />
-                            {errors.age && (
+                            {errors.old && (
                                 <StyledAlert
                                     variant="outlined"
                                     severity="error"
                                 >
-                                    {errors.age.message}
+                                    {errors.old.message}
                                 </StyledAlert>
                             )}
+                            <Input
+                                type="number"
+                                name="up_value"
+                                placeholder="上限"
+                                inputRef={register}
+                            />
                         </Column>
                     </DialogContent>
                     <DialogActions>
