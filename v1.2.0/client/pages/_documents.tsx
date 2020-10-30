@@ -8,6 +8,9 @@ import Document, {
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/styles';
 
+/**
+ * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする
+ */
 export default class MyDocument extends Document {
     static async getInitialProps(ctx: DocumentContext) {
         const styledComponentSheets = new StyledComponentSheets();

@@ -17,6 +17,9 @@ type Props = {
     headers: string[];
 };
 
+/**
+ * 受け取ったvalueを基にテーブルで表示
+ */
 export const Table: FC<Props> = ({ value, headers }) => {
     return (
         <StyledTableContainer component={Paper}>
@@ -32,12 +35,18 @@ export const Table: FC<Props> = ({ value, headers }) => {
                 </StyledTableHead>
                 <TableBody>
                     {value &&
-                        value.map((el) => (
-                            <TableRow>
-                                <TableCell align="center">{el[0]}</TableCell>
-                                <TableCell align="center">{el[1]}</TableCell>
-                            </TableRow>
-                        ))}
+                        value
+                            .filter((el) => el[1] !== '0個')
+                            .map((el) => (
+                                <TableRow>
+                                    <TableCell align="center">
+                                        {el[0]}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        {el[1]}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
                 </TableBody>
             </MaterialTable>
         </StyledTableContainer>
