@@ -70,7 +70,7 @@ def main():
     #lowBoundで0から∞まで
     #catで変数の種類指定
     # 上限を指定
-    upbound = int(input())
+    upbound = int(input("個数上限指定："))
     xs = up_limit(target_menu_list,upbound)
     #print("xs:",xs)
 
