@@ -13,7 +13,7 @@ def main():
 
 
     MenuDict = {}
-    with open('nutrition_data/macdonalds_nutrition.csv',encoding='cp932') as f:
+    with open(os.getcwd()+'/nutrition_data/macdonalds_nutrition.csv',encoding='cp932') as f:
         #print(f.read())
         reader = csv.DictReader(f)
         #print(reader)

@@ -27,7 +27,7 @@ def index():
         # 今回はカロリーを最小化したい。
         problem = pulp.LpProblem(name="1日の栄養素を満たすメニュー", sense=pulp.LpMinimize)
 
-        MDict = {}
+        MenuDict = {}
         with open(os.getcwd()+'/nutrition_data/macdonalds_nutrition.csv', encoding='cp932') as f:
             reader = csv.DictReader(f)
             # OrderedDict([('商品名', 'えびフィレオ'), ('重量g', '174'), ・・・が１行ごとに入っている
