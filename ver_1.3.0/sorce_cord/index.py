@@ -68,7 +68,7 @@ def main():
     eiyou_data = {}
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
-        eiyou_data[key] = get_nutrition_val_list(McdonaldsDict,target_menu_list,key)
+        eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
 
     # 変数の定義
     #LpVariableで自由辺巣を作成。値は-∞から∞まで
