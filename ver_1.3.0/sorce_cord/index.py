@@ -4,6 +4,7 @@ import csv
 from get_nutrition_val_list import get_nutrition_val_list
 from old_one_da_nutrition_dict import old_one_da_nutrition_dict
 from up_limit import up_limit
+from menu_list import menu_list
 
 def main():
     #問題の定義　最小化か最大化か　
@@ -23,38 +24,42 @@ def main():
             MenuDict[row["商品名"]] = row
             # print(row,'\n')
 
-    print("wx: ",MenuDict)
+    #print("wx: ",McdonaldsDict)
 
+    # メニューリストを自動で取得するようにする。のちに選択式になる予定。
+
+    target_menu_list = menu_list(MenuDict)
+    print("target_menu_list:",target_menu_list)
     # メニューリスト
-    target_menu_list = [
-    "てりやきマックバーガー",
-    "ハンバーガー",
-    "チーズバーガー",
-    "ベーコンレタスバーガー",
-    "チキンフィレオ",
-    "えびフィレオ",
-    "フィレオフィッシュ",
-    "ダブルチーズバーガー",
-    "ビッグマック",
-    "チキンマックナゲット 5ピース",
-    "マックフライポテト(L)",
-    "マックフライポテト(M)",
-    "マックフライポテト(S)",
-    "ホットアップルパイ",
-    "ワッフルコーン プレーン",
-    "マックフルーリーオレオ",
-    "プチパンケーキ",
-    "三角チョコパイ 黒",
-    "スイートコーン",
-    "サイドサラダ",
-    "ハッシュポテト",
-    "コカ・コーラ",
-    "アイスカフェラテ",
-    "キャラメルラテ",
-    "マックシェイクバニラ",
-    "マックシェイクチョコレート",
-    "ミニッツメイドオレンジ",
-    ]
+    # target_menu_list = [
+    # "てりやきマックバーガー",
+    # "ハンバーガー",
+    # "チーズバーガー",
+    # "ベーコンレタスバーガー",
+    # "チキンフィレオ",
+    # "えびフィレオ",
+    # "フィレオフィッシュ",
+    # "ダブルチーズバーガー",
+    # "ビッグマック",
+    # "チキンマックナゲット 5ピース",
+    # "マックフライポテト(L)",
+    # "マックフライポテト(M)",
+    # "マックフライポテト(S)",
+    # "ホットアップルパイ",
+    # "ワッフルコーン プレーン",
+    # "マックフルーリーオレオ",
+    # "プチパンケーキ",
+    # "三角チョコパイ 黒",
+    # "スイートコーン",
+    # "サイドサラダ",
+    # "ハッシュポテト",
+    # "コカ・コーラ",
+    # "アイスカフェラテ",
+    # "キャラメルラテ",
+    # "マックシェイクバニラ",
+    # "マックシェイクチョコレート",
+    # "ミニッツメイドオレンジ",
+    # ]
 
     one_da_nutrition_dict = old_one_da_nutrition_dict()
     #print("one_da_nutrition_dict:",one_da_nutrition_dict)
@@ -63,7 +68,7 @@ def main():
     eiyou_data = {}
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
-        eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
+        eiyou_data[key] = get_nutrition_val_list(McdonaldsDict,target_menu_list,key)
 
     # 変数の定義
     #LpVariableで自由辺巣を作成。値は-∞から∞まで

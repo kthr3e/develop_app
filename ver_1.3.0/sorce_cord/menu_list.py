@@ -1,3 +1,4 @@
+
 def menu_list(MenuDict):
-    
-    menu_list = MenuDict["商品名"]
+    menu_list = list(MenuDict.keys())
+    return menu_list
