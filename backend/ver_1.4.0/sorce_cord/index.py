@@ -5,25 +5,15 @@ from get_nutrition_val_list import get_nutrition_val_list
 from old_one_da_nutrition_dict import old_one_da_nutrition_dict
 from up_limit import up_limit
 from menu_list import menu_list
+from menu_dict import menu_dict
 
 def main():
     #問題の定義　最小化か最大化か　
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-
-    MenuDict = {}
-    with open(os.getcwd()+'/nutrition_data/macdonalds_nutrition.csv',encoding='cp932') as f:
-        #print(f.read())
-        reader = csv.DictReader(f)
-        #print(reader)
-        # OrderedDict([('商品名', 'えびフィレオ'), ('重量g', '174'), ・・・が１行ごとに入っている
-        # ※ジュース系などで、栄養価が「-」のものは０を置換済み
-        for row in reader:
-            # 'えびフィレオ' : OrderedDict([('商品名', 'えびフィレオ'), ('重量g', '174')・・・ の辞書形式に加工
-            MenuDict[row["商品名"]] = row
-            # print(row,'\n')
-
+    data = {"menu":["macdonalds","dennys"]}
+    MenuDict = menu_dict(data)
     #print("wx: ",McdonaldsDict)
 
     # メニューリストを自動で取得するようにする。のちに選択式になる予定。
