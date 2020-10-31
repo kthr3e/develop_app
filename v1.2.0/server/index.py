@@ -151,10 +151,10 @@ def index():
 
             response = [one_da_neces_nutrition, nutrition_comp]
             return make_response(jsonify(response))
+        # 条件にあった解が見つからなかった時はerrorを返す
         else:
             response = 'error'
             return make_response(jsonify(response))
-
     except:
         return"""
             ERROR !!!

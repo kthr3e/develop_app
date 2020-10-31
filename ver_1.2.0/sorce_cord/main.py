@@ -4,6 +4,7 @@ import csv
 from get_nutrition_val_list import get_nutrition_val_list
 from old_one_da_nutrition_dict import old_one_da_nutrition_dict
 from up_limit import up_limit
+from menu_list import menu_list
 
 def main():
     #問題の定義　最小化か最大化か　
@@ -25,6 +26,10 @@ def main():
 
     #print("wx: ",McdonaldsDict)
 
+    # メニューリストを自動で取得するようにする。のちに選択式になる予定。
+
+    menu_list = menu_list(MenuDict)
+    print("menu_list:",menu_list)
     # メニューリスト
     target_menu_list = [
     "てりやきマックバーガー",
