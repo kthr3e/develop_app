@@ -38,7 +38,7 @@ export const Table: FC<Props> = ({ value, headers }) => {
                         value
                             .filter((el) => el[1] !== '0個')
                             .map((el) => (
-                                <TableRow>
+                                <TableRow key={String(el)}>
                                     <TableCell align="center">
                                         {el[0]}
                                     </TableCell>

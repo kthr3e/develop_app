@@ -93,7 +93,7 @@ export const StartForm: FC<Props> = ({ control, errors, register }) => (
             name="up_value"
             margin="dense"
             inputRef={register}
-            defaultValue="10"
+            inputProps={{min: 0}}
         />
     </Column>
 );

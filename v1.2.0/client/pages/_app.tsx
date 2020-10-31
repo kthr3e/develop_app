@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         <AppBar>
                             <Toolbar>
                                 <Typography variant="h6">
-                                    栄養診断App v0.1.0
+                                    栄養診断App v1.2.0
                                 </Typography>
                             </Toolbar>
                         </AppBar>

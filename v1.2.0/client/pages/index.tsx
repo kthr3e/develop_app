@@ -1,10 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Table } from '../components/Table';
 import { Button } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import { Row } from '../styles/common';
 import { useForm } from 'react-hook-form';
 import { FormDialog } from '../components/FormDialog';
 import { StartForm } from '../components/StartForm';
@@ -101,7 +98,7 @@ export default function Home() {
     );
 }
 
-const Center = styled.div`
+export const Center = styled.div`
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
