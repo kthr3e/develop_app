@@ -60,6 +60,9 @@ def main():
     # "マックシェイクチョコレート",
     # "ミニッツメイドオレンジ",
     # ]
+    #
+    # print("\n")
+    # print("target_menu_list",target_menu_list)
 
     one_da_nutrition_dict = old_one_da_nutrition_dict()
     #print("one_da_nutrition_dict:",one_da_nutrition_dict)
@@ -75,7 +78,7 @@ def main():
     #lowBoundで0から∞まで
     #catで変数の種類指定
     # 上限を指定
-    upbound = int(input("個数上限指定："))
+    upbound = 3
     xs = up_limit(target_menu_list,upbound)
     #print("xs:",xs)
 
@@ -110,6 +113,7 @@ def main():
     #　変数名ごとに表示
     print("「一日に必要な栄養素を摂取するには」")
     for x in xs:
+        #print("x.value:",x.value)
         print(str(x),":",str(int(x.value())),"個")
 
     print("\n")
