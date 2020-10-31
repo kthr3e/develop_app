@@ -40,7 +40,7 @@ def index():
         target_menu_list = menu_list(MenuDict)
 
         data = request.get_json()["data"]
-        print(data)
+        print("data:",data)
         gender = int(data["gender"])
         old = int(data["old"])
         up_value = int(data["up_value"])
