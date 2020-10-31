@@ -128,7 +128,6 @@ def index():
         status = problem.solve()
 
         #print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
-
         # 簡易結果表示
         #print([x.value() for x in xs])
         # print(problem.objective.value())
@@ -143,20 +142,21 @@ def index():
 
                 # それぞれの栄養素がいくらか
                 # nutrition_comp 一日に必要な栄養素の比較
-                nutrition_comp = {}
-                for key in one_da_nutrition_dict:
-                    #print(key, ":", str(one_da_nutrition_dict[key]), "に対し", str(
-                    #round(pulp.lpDot(eiyou_data[key], xs).value())))
-                    nutrition_comp[key] = str(
-                    one_da_nutrition_dict[key])+"に対し"+str(round(pulp.lpDot(eiyou_data[key], xs).value()))
+            nutrition_comp = {}
+            for key in one_da_nutrition_dict:
+                #print(key, ":", str(one_da_nutrition_dict[key]), "に対し", str(
+                #round(pulp.lpDot(eiyou_data[key], xs).value())))
+                nutrition_comp[key] = str(
+                one_da_nutrition_dict[key])+"に対し"+str(round(pulp.lpDot(eiyou_data[key], xs).value()))
 
                 response = [one_da_neces_nutrition, nutrition_comp]
                 return make_response(jsonify(response))
-        # 解が見つかっていない時はその旨を返す
-        else:
-            a = "解が見つからない"
-            return make_response(jsonfy(a))
 
+        # 条件にあった解が見つからなかった時はその旨を返す
+        else:
+            return """
+                    解が見つかりませんでした。
+            """
     except:
         return"""
             ERROR !!!
