@@ -25,6 +25,13 @@ export const Result: FC<Props> = ({ value, on_click }) => {
             {String(value.data) === 'error' ? (
                 <Center>
                     <h1>そんな都合の良いメニューはありません！！！</h1>
+                    <Button
+                        onClick={on_click}
+                        variant="contained"
+                        color="primary"
+                    >
+                        TOPに戻る
+                    </Button>
                 </Center>
             ) : (
                 <Container>
