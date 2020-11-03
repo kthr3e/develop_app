@@ -12,14 +12,14 @@ def main():
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-    data = {"menu":["macdonalds","dennys"]}
+    data = {"menu":["macdonalds"]}
     MenuDict = menu_dict(data)
-    #print("wx: ",McdonaldsDict)
+    #print("wx: ",MenuDict)
 
     # メニューリストを自動で取得するようにする。のちに選択式になる予定。
 
     target_menu_list = menu_list(MenuDict)
-    print("target_menu_list:",target_menu_list)
+    #print("target_menu_list:",target_menu_list)
     # メニューリスト
     # target_menu_list = [
     # "てりやきマックバーガー",
@@ -62,15 +62,16 @@ def main():
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
         eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
+    #print("eiyou_data",eiyou_data)
 
     # 変数の定義
     #LpVariableで自由辺巣を作成。値は-∞から∞まで
     #lowBoundで0から∞まで
     #catで変数の種類指定
     # 上限を指定
-    upbound = 3
+    upbound = 10
     xs = up_limit(target_menu_list,upbound)
-    #print("xs:",xs)
+    print("xs:",xs)
 
     # 目的関数：カロリーを最小化
     # lpdot:二つのリストのない席を求める。
@@ -94,23 +95,27 @@ def main():
     #与えられた問題の内容を表示
     #print(problem)
     status = problem.solve()
-    #print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
+    print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
 
-    #簡易結果表示
-    #print([x.value() for x in xs])
-    #print(problem.objective.value())
+    if pulp.LpStatus[status] == "Optional":
+        #簡易結果表示
+        #print([x.value() for x in xs])
+        #print(problem.objective.value())
 
-    #　変数名ごとに表示
-    print("「一日に必要な栄養素を摂取するには」")
-    for x in xs:
-        #print("x.value:",x.value)
-        print(str(x),":",str(int(x.value())),"個")
+        #　変数名ごとに表示
+        print("「一日に必要な栄養素を摂取するには」")
+        for x in xs:
+            #print("x.value:",x.value)
+            print(str(x),":",x.value(),"個")
 
-    print("\n")
-    # それぞれの栄養素がいくらか
-    print("栄養素の値")
-    for key in one_da_nutrition_dict:
-        print(key,":",str(one_da_nutrition_dict[key]),"に対し",str(round(pulp.lpDot(eiyou_data[key],xs).value())))
+        print("\n")
+        # それぞれの栄養素がいくらか
+        print("栄養素の値")
+        for key in one_da_nutrition_dict:
+            print(key,":",str(one_da_nutrition_dict[key]),"に対し",str(round(pulp.lpDot(eiyou_data[key],xs).value())))
+
+    else:
+         print("結果が求められていないか、ERRORか")
 
 # python main.pyで実行されたときだけ動くようにする。
 if  __name__ == "__main__":		# importされると"__main__"は入らないので，実行かimportかを判断できる．
