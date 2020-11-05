@@ -60,6 +60,9 @@ def main():
     # "マックシェイクチョコレート",
     # "ミニッツメイドオレンジ",
     # ]
+    #
+    # print("\n")
+    # print("target_menu_list",target_menu_list)
 
     one_da_nutrition_dict = old_one_da_nutrition_dict()
     #print("one_da_nutrition_dict:",one_da_nutrition_dict)
@@ -69,13 +72,14 @@ def main():
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
         eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
+    print("eiyou_data:",eiyou_data)
 
     # 変数の定義
     #LpVariableで自由辺巣を作成。値は-∞から∞まで
     #lowBoundで0から∞まで
     #catで変数の種類指定
     # 上限を指定
-    upbound = int(input("個数上限指定："))
+    upbound = 3
     xs = up_limit(target_menu_list,upbound)
     #print("xs:",xs)
 
@@ -110,6 +114,7 @@ def main():
     #　変数名ごとに表示
     print("「一日に必要な栄養素を摂取するには」")
     for x in xs:
+        #print("x.value:",x.value)
         print(str(x),":",str(int(x.value())),"個")
 
     print("\n")
