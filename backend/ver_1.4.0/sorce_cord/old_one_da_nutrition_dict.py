@@ -7,7 +7,7 @@
 import csv
 import pandas as pd
 
-def old_one_da_nutrition_dict(gender = 1,old = 5):
+def old_one_da_nutrition_dict(gender = 1,old = 7):
     # 年齢を取得
     #year,month,day = map(int,input("あなたの生年月日を入力してください　例：1998/09/01\n").split("/"))
     #age = calculate_age(year,month,day)
