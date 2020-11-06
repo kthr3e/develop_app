@@ -85,7 +85,6 @@ def main():
     for key in eiyou_data.keys():
         if key == "食塩相当量[g]":
             continue
-        # メニュー数と同じ数の栄養素データが入っている時だけ、計算するようにする。
         if len(eiyou_data[key]) == len(target_menu_list):
             #print("eiyou_data[key]",len(eiyou_data[key]),len(target_menu_list))
             problem += pulp.lpDot(eiyou_data[key], xs) >= float(one_da_nutrition_dict[key])
