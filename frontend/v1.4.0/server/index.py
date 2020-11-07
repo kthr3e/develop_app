@@ -37,7 +37,9 @@ def index():
         MenuDict = menu_dict(data["shop"])
 
         # メニューリストをcsvから自動取得
-        target_menu_list = menu_list(MenuDict)
+        # data["menu"]から選択されたメニューを受け取る
+        # data["menu"]が空の場合は全メニュー選択
+        target_menu_list = menu_list(data["menu"])
 
 
         gender = int(data["gender"])
