@@ -6,8 +6,9 @@
 #from calculate_age import calculate_age
 import csv
 import pandas as pd
+import os
 
-def old_one_da_nutrition_dict(gender = 1,old = 7):
+def old_one_da_nutrition_dict(gender = 1,old = 0):
     # 年齢を取得
     #year,month,day = map(int,input("あなたの生年月日を入力してください　例：1998/09/01\n").split("/"))
     #age = calculate_age(year,month,day)
@@ -19,7 +20,7 @@ def old_one_da_nutrition_dict(gender = 1,old = 7):
     one_da_nutrition_dict = {}
     old_category = 0
     if gender:
-        with open('nutrition_data/woman_old_age_nutrition.csv',encoding='cp932') as f:
+        with open(os.getcwd()+'/nutrition_data/woman_old_age_nutrition.csv',encoding='cp932') as f:
             #lst = pd.read_csv(f).values.tolist()
             #print(lst)
             reader = csv.DictReader(f)
@@ -28,7 +29,7 @@ def old_one_da_nutrition_dict(gender = 1,old = 7):
                 one_da_nutrition_dict[old_category] = row
                 old_category += 1
     else:
-        with open('nutrition_data/man_old_age_nutrition.csv',encoding='cp932') as f:
+        with open(os.getcwd()+'/nutrition_data/man_old_age_nutrition.csv',encoding='cp932') as f:
             #lst = pd.read_csv(f).values.tolist()
             #print(lst)
             reader = csv.DictReader(f)

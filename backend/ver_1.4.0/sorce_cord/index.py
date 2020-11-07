@@ -12,7 +12,7 @@ def main():
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-    data = {"menu":["dennys"]}
+    data = {"menu":["dennys","macdonalds"]}
     MenuDict = menu_dict(data)
     #print("wx: ",MenuDict)
 
@@ -62,7 +62,7 @@ def main():
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
         eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
-    print("eiyou_data",eiyou_data)
+    #print("eiyou_data",eiyou_data)
 
     # 変数の定義
     #LpVariableで自由辺巣を作成。値は-∞から∞まで
@@ -71,7 +71,7 @@ def main():
     # 上限を指定
     upbound = 10
     xs = up_limit(target_menu_list,upbound)
-    print("xs:",xs)
+    #print("xs:",xs)
 
     # 目的関数：カロリーを最小化
     # lpdot:二つのリストのない席を求める。
@@ -85,7 +85,10 @@ def main():
     for key in eiyou_data.keys():
         if key == "食塩相当量[g]":
             continue
-        problem += pulp.lpDot(eiyou_data[key], xs) >= float(one_da_nutrition_dict[key])
+        # メニューの数と栄養素のデータの数が一致しないときは計算しない。
+        if len(eiyou_data[key]) == len(target_menu_list):
+            #print("eiyou_data[key]",len(eiyou_data[key]),len(target_menu_list))
+            problem += pulp.lpDot(eiyou_data[key], xs) >= float(one_da_nutrition_dict[key])
 
     problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= float(one_da_nutrition_dict["食塩相当量[g]"])
 
@@ -94,7 +97,7 @@ def main():
     status = problem.solve()
     print("Status:", pulp.LpStatus[status])  # Statusがoptionalなら解が見つかっている。
 
-    if pulp.LpStatus[status] == "Optional":
+    if pulp.LpStatus[status] == "Optimal":
         #簡易結果表示
         #print([x.value() for x in xs])
         #print(problem.objective.value())
