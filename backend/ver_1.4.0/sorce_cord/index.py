@@ -12,7 +12,7 @@ def main():
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-    data = {"menu":["dennys","macdonalds"]}
+    data = {"menu":["dennys"]}
     MenuDict = menu_dict(data)
     #print("wx: ",MenuDict)
 
@@ -62,6 +62,7 @@ def main():
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
         eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
+    
     #print("eiyou_data",eiyou_data)
 
     # 変数の定義

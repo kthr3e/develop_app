@@ -104,7 +104,7 @@ def index():
             # nutrition_comp 一日に必要な栄養素の比較
             nutrition_comp = {}
             for key in one_da_nutrition_dict:
-                if str(round(pulp.lpDot(eiyou_data[key], xs).value())) != 0
+                if str(round(pulp.lpDot(eiyou_data[key], xs).value())) != 0:
                     print(key, ":", str(one_da_nutrition_dict[key]), "に対し", str(
                         round(pulp.lpDot(eiyou_data[key], xs).value())))
                     nutrition_comp[key] = str(

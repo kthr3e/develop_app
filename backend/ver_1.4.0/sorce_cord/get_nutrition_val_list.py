@@ -4,7 +4,9 @@ def get_nutrition_val_list(nutrition_dict, target_menu_list, eiyou_name):
     result_list = []
     for menu_name in target_menu_list:
         #　栄養価を取得してfloatに変換
+        # eiyou_nameがnutrition_dict[menu_name]に入っている場合追加する。
         if eiyou_name in nutrition_dict[menu_name]:
             eiyou_val = nutrition_dict[menu_name][eiyou_name]
             result_list.append(float(eiyou_val))
+            #print(menu_name,eiyou_name)
     return result_list
