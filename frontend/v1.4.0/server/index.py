@@ -34,8 +34,7 @@ def index():
         data = request.get_json()["data"]
         print("data:",data)
         # ここで店の名前を["dennys","macdonalds"]のようにリストとして受け取って欲しい。
-        shop = data["shop"]
-        MenuDict = menu_dict(data)
+        MenuDict = menu_dict(data["shop"])
 
         # メニューリストをcsvから自動取得
         target_menu_list = menu_list(MenuDict)
