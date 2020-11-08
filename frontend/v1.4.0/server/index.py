@@ -51,6 +51,7 @@ def index():
         # 対象とする栄養素について、対象の商品リストごとの栄養価を、リスト形式で作成する
         eiyou_data = {}
         for key in one_da_nutrition_dict.keys():
+            print(key)
             # keyに入っている栄養の名称を、データのdictのkeyにする。
             eiyou_data[key] = get_nutrition_val_list(
                 MenuDict, target_menu_list, key)
