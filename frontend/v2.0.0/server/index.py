@@ -8,7 +8,6 @@ import os
 from get_nutrition_val_list import get_nutrition_val_list
 from old_one_da_nutrition_dict import old_one_da_nutrition_dict
 from up_limit import up_limit
-from menu_list import menu_list
 from menu_dict import menu_dict
 
 
@@ -38,8 +37,13 @@ def index():
 
         # メニューリストをcsvから自動取得
         # data["menu"]から選択されたメニューを受け取る
-        # data["menu"]が空の場合は全メニュー選択
-        target_menu_list = menu_list(data["menu"])
+        # data["menu"]が空の場合は全メニュー選ぶ
+        #　このメニューもリストとして返して欲しい
+
+        if not data["menu"]:
+            target_menu_list = list(MenuDict.keys())
+        else:
+            target_menu_list = data["menu"]
 
 
         gender = int(data["gender"])
@@ -53,7 +57,6 @@ def index():
         # 対象とする栄養素について、対象の商品リストごとの栄養価を、リスト形式で作成する
         eiyou_data = {}
         for key in one_da_nutrition_dict.keys():
-            print(key)
             # keyに入っている栄養の名称を、データのdictのkeyにする。
             eiyou_data[key] = get_nutrition_val_list(
                 MenuDict, target_menu_list, key)

@@ -4,7 +4,6 @@ import csv
 from get_nutrition_val_list import get_nutrition_val_list
 from old_one_da_nutrition_dict import old_one_da_nutrition_dict
 from up_limit import up_limit
-from menu_list import menu_list
 from menu_dict import menu_dict
 
 def main():
@@ -12,13 +11,45 @@ def main():
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-    data = {"menu":["dennys"]}
-    MenuDict = menu_dict(data)
+    data = {"shop":["dennys","macdonalds"]}
+    MenuDict = menu_dict(data["shop"])
     #print("wx: ",MenuDict)
 
     # メニューリストを自動で取得するようにする。のちに選択式になる予定。
 
-    target_menu_list = menu_list(MenuDict)
+    data = {"menu":[ "てりやきマックバーガー",
+        "ハンバーガー",
+        "チーズバーガー",
+        "ベーコンレタスバーガー",
+        "チキンフィレオ",
+        "えびフィレオ",
+        "フィレオフィッシュ",
+        "ダブルチーズバーガー",
+        "ビッグマック",
+        "チキンマックナゲット 5ピース",
+        "マックフライポテト(L)",
+        "マックフライポテト(M)",
+        "マックフライポテト(S)",
+        "ホットアップルパイ",
+        "ワッフルコーン プレーン",
+        "マックフルーリーオレオ",
+        "プチパンケーキ",
+        "三角チョコパイ 黒",
+        "スイートコーン",
+        "サイドサラダ",
+        "ハッシュポテト",
+        "コカ・コーラ",
+        "アイスカフェラテ",
+        "キャラメルラテ",
+        "マックシェイクバニラ",
+        "マックシェイクチョコレート",
+        "ミニッツメイドオレンジ",
+        ]}
+
+    if not data["menu"]:
+        target_menu_list = list(MenuDict.keys())
+    else:
+        target_menu_list = data["menu"]
     #print("target_menu_list:",target_menu_list)
     # メニューリスト
     # target_menu_list = [
@@ -62,7 +93,6 @@ def main():
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
         eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
-    
     #print("eiyou_data",eiyou_data)
 
     # 変数の定義
