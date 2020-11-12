@@ -1,4 +1,5 @@
 import {
+    Checkbox,
     FormControl,
     FormControlLabel,
     FormLabel,
@@ -87,13 +88,36 @@ export const StartForm: FC<Props> = ({ control, errors, register }) => (
                 {errors.old.message}
             </StyledAlert>
         )}
+            <InputLabel id="demo-dialog-select-label">店舗</InputLabel>
+        <FormControl>
+            <Controller
+                name="shop[0]"
+                control={control}
+                as={
+                    <FormControlLabel
+                        control={<Checkbox value="macdonalds" />}
+                        label="マクドナルド"
+                    />
+                }
+            />
+            <Controller
+                name="shop[1]"
+                control={control}
+                as={
+                    <FormControlLabel
+                        control={<Checkbox value="dennys" />}
+                        label="デニーズ"
+                    />
+                }
+            />
+        </FormControl>
         <TextField
             label="上限"
             type="number"
             name="up_value"
             margin="dense"
             inputRef={register}
-            inputProps={{min: 0}}
+            inputProps={{ min: 0 }}
         />
     </Column>
 );
