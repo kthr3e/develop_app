@@ -1,14 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
 import styled from "styled-components";
-import { Button } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { Form } from "../components/Form";
 import { useSetRecoilState } from "recoil";
 import { ResultType, result_value } from "../recoil";
-import { Menu } from "../components/Menu";
+import { MenuList } from "../components/MenuList";
 
-type FormData = {
+export type FormData = {
   gender: string;
   old: string;
   up_value: string;
@@ -16,14 +14,9 @@ type FormData = {
 };
 
 export default function Home() {
-  const {
-    control,
-    reset,
-    handleSubmit,
-    errors,
-    register,
-    formState: { isSubmitting },
-  } = useForm<FormData>();
+  const { reset, handleSubmit, errors, register, formState } = useForm<
+    FormData
+  >();
   const set_result_value = useSetRecoilState<ResultType>(result_value);
 
   const on_submit = async (data: FormData) => {
@@ -35,7 +28,7 @@ export default function Home() {
       }
       data.shop = arr;
       console.log(data);
-      const res = await axios.post("http://localhost:5000/macdonalds", {
+      const res = await axios.post("http://localhost:5000/api/check", {
         data,
       });
       console.log(res);
@@ -51,13 +44,12 @@ export default function Home() {
       <p>
         あなたに必要な1日の栄養のうち、選んだメニューがどれだけ補えるか（充足率）をチェックすることができます。
       </p>
-      <Menu />
+      <MenuList />
       <Form
-        control={control}
         register={register}
         errors={errors}
         handle_submit={handleSubmit(on_submit)}
-        is_loading={isSubmitting}
+        is_loading={formState.isSubmitting}
       />
     </>
   );

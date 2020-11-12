@@ -1,19 +1,25 @@
 import React from "react";
 import { FC } from "react";
 import styled from "styled-components";
-import { Column, Row } from "../styles/common";
+import { old_options } from "../util/OldOptions";
 
 type Props = {
-  control: any;
   errors: any;
   register: any;
+  handle_submit: any;
+  is_loading: boolean;
 };
 
 /**
  * 性別、年齢、上限などを入力するフォーム
  */
-export const Form: FC<Props> = ({ control, errors, register }) => (
-  <Column>
+export const Form: FC<Props> = ({
+  errors,
+  register,
+  handle_submit,
+  is_loading,
+}) => (
+  <form onSubmit={handle_submit}>
     <label>性別</label>
     <label>
       男性
@@ -27,17 +33,11 @@ export const Form: FC<Props> = ({ control, errors, register }) => (
     <label>
       年齢
       <select name="old" ref={register({ required: "年齢を選択してください" })}>
-        <option value="0">3-5歳</option>
-        <option value="1">6-7歳</option>
-        <option value="2">8-9歳</option>
-        <option value="3">10-11歳</option>
-        <option value="4">12-14歳</option>
-        <option value="5">15-17歳</option>
-        <option value="6">18-29歳</option>
-        <option value="7">30-49歳</option>
-        <option value="8">50-64歳</option>
-        <option value="9">65-74歳</option>
-        <option value="10">75歳以上</option>
+        {old_options.map(({ value, text }) => (
+          <option key={value} value={value}>
+            {text}
+          </option>
+        ))}
       </select>
     </label>
     {errors.old && <p>{errors.old.message}</p>}
@@ -45,5 +45,5 @@ export const Form: FC<Props> = ({ control, errors, register }) => (
       上限
       <input type="number" name="up_value" ref={register} />
     </label>
-  </Column>
+  </form>
 );

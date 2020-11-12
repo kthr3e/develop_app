@@ -6,7 +6,6 @@ import { StylesProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { theme } from "../styles/theme";
 import "../styles/global.scss";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { RecoilRoot } from "recoil";
 
 /**
@@ -28,11 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <StyledComponentsThemeProvider theme={theme}>
           <RecoilRoot>
             <CssBaseline />
-            <AppBar>
-              <Toolbar>
-                <Typography variant="h6">栄養診断App v1.2.0</Typography>
-              </Toolbar>
-            </AppBar>
+            <h1>栄養診断App v1.2.0</h1>
             <Component {...pageProps} />
           </RecoilRoot>
         </StyledComponentsThemeProvider>
