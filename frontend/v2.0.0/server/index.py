@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder="./build/static",
 CORS(app)  # Cross Origin Resource Sharing
 
 
-@app.route('/macdonalds', methods=["POST"])
+@app.route('/api/check', methods=["POST"])
 def index():
     # error構文を追加　もしGETが正常じゃないとき
     try:
