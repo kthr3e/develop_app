@@ -9,3 +9,9 @@ export const result_value = atom<ResultType>({
   default: {} as ResultType,
 });
 
+export type ToastType = [string, ("error" | "info" | "success" | "warning")?];
+
+export const toast_value = atom<ToastType>({
+  key: "toast_value",
+  default: [""],
+});

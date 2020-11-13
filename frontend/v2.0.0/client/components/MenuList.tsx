@@ -1,10 +1,12 @@
-import React from 'react'
-import { Menu } from './Menu'
+import React, { FC } from "react";
 
-export const MenuList = () => {
-    return (
-        <div>
-            <Menu />
-        </div>
-    )
-}
+type Props = {
+  label: string;
+  value: number;
+};
+
+export const MenuList: FC<Props> = ({ label, value }) => {
+  return (
+      <div></div>
+  );
+};

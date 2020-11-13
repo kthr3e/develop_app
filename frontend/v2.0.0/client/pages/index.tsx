@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { Form } from "../components/Form";
 import { useSetRecoilState } from "recoil";
-import { ResultType, result_value } from "../recoil";
-import { MenuList } from "../components/MenuList";
+import { ResultType, result_value, ToastType, toast_value } from "../recoil";
+import { MenuBox } from "../components/MenuBox";
 
 export type FormData = {
   gender: string;
@@ -18,6 +18,7 @@ export default function Home() {
     FormData
   >();
   const set_result_value = useSetRecoilState<ResultType>(result_value);
+  const set_toast_value = useSetRecoilState<ToastType>(toast_value);
 
   const on_submit = async (data: FormData) => {
     try {
@@ -44,7 +45,8 @@ export default function Home() {
       <p>
         あなたに必要な1日の栄養のうち、選んだメニューがどれだけ補えるか（充足率）をチェックすることができます。
       </p>
-      <MenuList />
+      <MenuBox />
+      <button onClick={()=>set_toast_value(['user'])}></button>
       <Form
         register={register}
         errors={errors}

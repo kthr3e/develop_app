@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { theme } from "../styles/theme";
 import "../styles/global.scss";
 import { RecoilRoot } from "recoil";
+import { Toast } from "../components/Toast";
 
 /**
  * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <StyledComponentsThemeProvider theme={theme}>
           <RecoilRoot>
             <CssBaseline />
+            <Toast />
             <h1>栄養診断App v1.2.0</h1>
             <Component {...pageProps} />
           </RecoilRoot>
