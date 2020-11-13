@@ -12,7 +12,7 @@ export const Toast = () => {
   useEffect(() => {
     if (!text) return;
 
-    /** 3病後に閉じる */
+    /** 3秒後に閉じる */
     const close = setTimeout(() => {
       reset();
     }, 3000);
