@@ -88,21 +88,21 @@ def index():
         else:
             response = 'error'
             return make_response(jsonify(response))
+            recommend_menu_list,one_da_nutrition_dict = recommend(MenuDict,target_menu_list,one_da_nutrition_dict,eiyou_data)
+            eiyou_data,xs,status = find(problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
+            #　変数名ごとに表示
+            print("追加でこんなメニューはどうですか")
+            for x in xs:
+                if int(x.value()) != 0:
+                    #print("x.value:",x.value)
+                    print(str(x),":",str(int(x.value())),"個")
+
+            print("\n")
+
     except:
         return"""
             ERROR !!!
             """
-        recommend_menu_list,one_da_nutrition_dict = recommend(MenuDict,target_menu_list,one_da_nutrition_dict,eiyou_data)
-        eiyou_data,xs,status = find(problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
-        #　変数名ごとに表示
-        print("追加でこんなメニューはどうですか")
-        for x in xs:
-            if int(x.value()) != 0:
-                #print("x.value:",x.value)
-                print(str(x),":",str(int(x.value())),"個")
-
-        print("\n")
-
 
 # python main.pyで実行されたときだけ動くようにする。
 if __name__ == "__main__":		# importされると"__main__"は入らないので，実行かimportかを判断できる．
