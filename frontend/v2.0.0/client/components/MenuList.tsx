@@ -31,5 +31,4 @@ const List = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   height: 400px;
-  scroll-snap-type: mandatory;
 `;
