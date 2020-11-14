@@ -47,6 +47,7 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
             #print("栄養素とxsの内積",pulp.lpDot(eiyou_data[key], xs))
 
     if len(eiyou_data["食塩相当量[g]"]) == len(target_menu_list):
+        cal_key.append("食塩相当量[g]")
         problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= float(one_da_nutrition_dict["食塩相当量[g]"])
 
     status = problem.solve()
