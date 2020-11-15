@@ -15,22 +15,22 @@ export const Result: FC<Props> = () => {
   const value = useRecoilValue(result_value);
   return (
     <>
-      <Container>
-        <h1>診断結果</h1>
-        <Row>
-          <Table
-            headers={["メニュー", "個数"]}
-            value={Object.entries(value.data[0])}
-          />
-          <Table
-            headers={["栄養素", "量"]}
-            value={Object.entries(value.data[1])}
-          />
-        </Row>
-        <button>
-          TOPに戻る
-        </button>
-      </Container>
+      {value.data && (
+        <Container>
+          <h1>診断結果</h1>
+          <Row>
+            <Table
+              headers={["メニュー", "個数"]}
+              value={Object.entries(value.data[0])}
+            />
+            <Table
+              headers={["栄養素", "量"]}
+              value={Object.entries(value.data[1])}
+            />
+          </Row>
+          <button>TOPに戻る</button>
+        </Container>
+      )}
     </>
   );
 };

@@ -12,13 +12,14 @@ type Props = {
 };
 
 export const MenuList: FC<Props> = ({ dir, index, value, label }) => {
-  const menu_list = label === "マクドナルド" ? mac_menu : dennys_menu;
+  const menu_list = label === "macdonalds" ? mac_menu : dennys_menu;
 
   return (
     <List
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`tab-${index}`}
+      key={value}
       dir={dir}>
       {value === index &&
         menu_list.map((menu) => <MenuItem name={menu.name} key={menu.name} />)}

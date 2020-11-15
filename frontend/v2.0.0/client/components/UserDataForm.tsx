@@ -14,7 +14,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { menu_value, ResultType, result_value } from "../recoil";
+import { menu_value, ResultType, result_value, shop_state } from "../recoil";
 import { Row } from "../styles/common";
 import { old_options } from "../util/OldOptions";
 
@@ -33,16 +33,16 @@ export const UserDataForm = () => {
   const { reset, handleSubmit, errors, register, control } = useForm<
     FormData
   >();
+  const shop = useRecoilValue(shop_state);
   const menu = useRecoilValue(menu_value);
   const set_result_value = useSetRecoilState<ResultType>(result_value);
 
   const on_submit = async (data: FormData) => {
     console.log(data);
     try {
-      data["shop"] = ["macdonalds", "dennys"];
-      if (menu.length > 0) {
-        data["menu"] = menu;
-      }
+      data["shop"] = shop;
+      data["menu"] = menu;
+      console.log(data)
       const res = await Axios.post("http://localhost:5000/api/check", {
         data,
       });
@@ -77,6 +77,7 @@ export const UserDataForm = () => {
           }
           name="gender"
           control={control}
+          defaultValue=''
         />
       </InputLabel>
       <InputLabel>

@@ -20,3 +20,8 @@ export const menu_value = atom<string[]>({
   key: "menu_value",
   default: [],
 });
+
+export const shop_state = atom<string[]>({
+    key: "shop_state",
+    default: []
+})
