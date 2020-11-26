@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { AppProps } from "next/app";
-import { ThemeProvider } from "styled-components";
-import { theme } from "../styles/theme";
 import "../styles/global.scss";
 import { RecoilRoot } from "recoil";
 import { Footer } from "../components/Footer";
@@ -20,12 +18,10 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <RecoilRoot>
-        <h1>栄養診断App v2.0.0</h1>
-        <Component {...pageProps} />
-        <Footer />
-      </RecoilRoot>
-    </ThemeProvider>
+    <RecoilRoot>
+      <h1>栄養診断App v2.0.0</h1>
+      <Component {...pageProps} />
+      <Footer />
+    </RecoilRoot>
   );
 }

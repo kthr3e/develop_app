@@ -1,28 +1,44 @@
 import React, { FC } from "react";
 import { mac_menu } from "../util/MacMenu";
-import { MenuItem } from "./MenuItem";
 import { dennys_menu } from "../util/DennysMenu";
 import styled from "styled-components";
+import { MenuItems } from "./MenuItems";
 
 type Props = {
-  dir?: string;
-  index: number;
-  value: number;
   label: string;
 };
 
-export const MenuList: FC<Props> = ({ dir, index, value, label }) => {
-  const menu_list = label === "macdonalds" ? mac_menu : dennys_menu;
+export const MenuList: FC<Props> = ({ label }) => {
+  const get_list = () => {
+    switch (label) {
+      case "macdonalds":
+        return mac_menu;
+      case "dennys":
+        return dennys_menu;
+      default:
+        return [];
+    }
+  };
+
+  const paginate = (list: { name: string }[]) => {
+    const arr = [];
+    const NUM = 5;
+    if (list.length === 0) return;
+    for (let i = 0; i < Math.floor(list.length); i++) {
+      if (list.length > i * NUM + NUM) {
+        arr.push(list.slice(i * NUM, list.length));
+      }
+      arr.push(list.slice(i * NUM, i * NUM + NUM));
+    }
+    return arr;
+  };
+
+  const menu_list = paginate(get_list());
 
   return (
-    <List
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      key={value}
-      dir={dir}>
-      {value === index &&
-        menu_list.map((menu) => <MenuItem name={menu.name} key={menu.name} />)}
+    <List>
+      {menu_list &&
+        menu_list.map((menu,i) => <MenuItems key={i} menu={menu} />)}
     </List>
   );
 };

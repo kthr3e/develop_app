@@ -10,9 +10,10 @@ type Props = {
 
 export const MenuItem: FC<Props> = ({ name }) => {
   const [menu, set_menu] = useRecoilState(menu_value);
-  const contain = menu.includes(name);
+  const include = menu.includes(name);
+  
   const handle_click = () => {
-    if (contain) {
+    if (include) {
       set_menu((prev) => prev.filter((el) => el !== name));
       return;
     }
@@ -21,24 +22,44 @@ export const MenuItem: FC<Props> = ({ name }) => {
 
   return (
     <Label>
-      <StyledCard>
-        <p>{name}</p>
-        <input type="checkbox" onClick={handle_click} checked={contain} />
-      </StyledCard>
+      <Card>
+        <ImgFrame></ImgFrame>
+        <TextBox>
+          <CardTitle>{name}</CardTitle>
+        </TextBox>
+      </Card>
+      <input type="checkbox" onClick={handle_click} checked={include} hidden />
     </Label>
   );
 };
 
-const StyledCard = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30px;
-  scroll-snap-align: start;
-  p {
-    font-size: 10px;
-    font-weight: bold;
-  }
+const Card = styled.div`
+  width: 288px;
+  height: auto;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+`;
+
+const ImgFrame = styled.div`
+  width: 100%;
+  height: auto;
+  padding-top: 56.25%;
+  background: url(https://placehold.jp/640x360.png) no-repeat center;
+  background-size: cover;
+  box-sizing: border-box;
+`;
+
+const TextBox = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 20px 18px;
+  background: #ffffff;
+  box-sizing: border-box;
+`;
+
+const CardTitle = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 125%;
 `;
 
 const Label = styled.label`

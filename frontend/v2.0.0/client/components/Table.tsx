@@ -12,9 +12,9 @@ type Props = {
  * 受け取ったvalueを基にテーブルで表示
  */
 export const Table: FC<Props> = ({ value, headers }) => (
-  <StyledTableContainer>
+  <TableContainer>
     <table>
-      <StyledTableHead>
+      <TableHead>
         <tr>
           {headers.map((header) => (
             <td align="center" key={String(header)}>
@@ -22,7 +22,7 @@ export const Table: FC<Props> = ({ value, headers }) => (
             </td>
           ))}
         </tr>
-      </StyledTableHead>
+      </TableHead>
       <tbody>
         {value &&
           value
@@ -35,12 +35,12 @@ export const Table: FC<Props> = ({ value, headers }) => (
             ))}
       </tbody>
     </table>
-  </StyledTableContainer>
+  </TableContainer>
 );
 
-const StyledTableContainer = styled.div<any>`
+const TableContainer = styled.div<any>`
   margin-bottom: 30px;
 `;
-const StyledTableHead = styled.thead`
+const TableHead = styled.thead`
   background-color: ${COLOR.SMOKE};
 `;

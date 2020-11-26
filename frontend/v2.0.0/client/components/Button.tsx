@@ -1,16 +1,20 @@
 import { relative } from "path";
-import React from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 
-export const Button = () => {
+type Props = {
+  type?: "button" | "submit";
+};
+
+export const Button: FC<Props> = ({ children, type }) => {
   return (
-    <StyledButton>
-      <span>PUSH！</span>
+    <StyledButton type={type}>
+      <span>{children}</span>
     </StyledButton>
   );
 };
 
-const StyledButton = styled.a`
+const StyledButton = styled.button`
   text-decoration: none;
   overflow: hidden;
   padding: 1.5rem 6rem;

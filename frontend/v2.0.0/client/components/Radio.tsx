@@ -6,7 +6,7 @@ export const Radio = () => {
     <RadioContainer>
       <RadioGroup>
         <InputContainer>
-          <RadioButton id="walk" type="radio" name="radio" />
+          <RadioButton type="radio" name="radio" />
           <RadioTile>
             <Icon>男 </Icon>
             <RadioLabel htmlFor="walk">Walk</RadioLabel>
@@ -14,7 +14,7 @@ export const Radio = () => {
         </InputContainer>
 
         <InputContainer>
-          <RadioButton id="bike" type="radio" name="radio" />
+          <RadioButton type="radio" name="radio" />
           <RadioTile>
             <Icon>女</Icon>
             <RadioLabel htmlFor="bike">Bike</RadioLabel>

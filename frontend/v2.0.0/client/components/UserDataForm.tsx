@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
@@ -7,6 +8,9 @@ import styled from "styled-components";
 import { menu_value, ResultType, result_value, shop_state } from "../recoil";
 import { Row } from "../styles/common";
 import { old_options } from "../util/OldOptions";
+import { Button } from "./Button";
+import { Radio } from "./Radio";
+import { Select } from "./Select";
 
 export type FormData = {
   gender: string;
@@ -28,6 +32,7 @@ export const UserDataForm = () => {
   const set_result_value = useSetRecoilState<ResultType>(result_value);
 
   const on_submit = async (data: FormData) => {
+    const router = useRouter();
     console.log(data);
     try {
       data["shop"] = shop;
@@ -39,18 +44,23 @@ export const UserDataForm = () => {
       console.log(res);
       set_result_value(res);
       reset();
+      router.push("/result");
     } catch (res) {
       console.log(res);
     }
   };
   return (
     <form onSubmit={handleSubmit(on_submit)}>
-      <label>性別</label>
-      <label>年齢</label>
+      <label>
+        性別
+        <Radio />
+      </label>
+      <label>
+        年齢
+        <Select />
+      </label>
       <input type="number" name="up_value" ref={register} />
-      <button color="primary" type="submit">
-        診断する
-      </button>
+      <Button type="submit">診断する</Button>
     </form>
   );
 };
