@@ -1,4 +1,3 @@
-import { Card, Checkbox } from "@material-ui/core";
 import React, { FC } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
@@ -22,15 +21,15 @@ export const MenuItem: FC<Props> = ({ name }) => {
 
   return (
     <Label>
-      <StyledCard variant="outlined">
+      <StyledCard>
         <p>{name}</p>
-        <Checkbox onClick={handle_click} checked={contain} />
+        <input type="checkbox" onClick={handle_click} checked={contain} />
       </StyledCard>
     </Label>
   );
 };
 
-const StyledCard = styled(Card)`
+const StyledCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

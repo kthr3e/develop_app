@@ -1,13 +1,3 @@
-import {
-  Button,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  TextField,
-} from "@material-ui/core";
 import Axios from "axios";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -42,7 +32,7 @@ export const UserDataForm = () => {
     try {
       data["shop"] = shop;
       data["menu"] = menu;
-      console.log(data)
+      console.log(data);
       const res = await Axios.post("http://localhost:5000/api/check", {
         data,
       });
@@ -54,60 +44,14 @@ export const UserDataForm = () => {
     }
   };
   return (
-    <Form onSubmit={handleSubmit(on_submit)}>
-      <InputLabel>
-        性別
-        <Controller
-          as={
-            <RadioGroup>
-              <Row>
-                <FormControlLabel
-                  value="0"
-                  control={<Radio color="primary" />}
-                  label="男性"
-                />
-                <FormControlLabel
-                  value="1"
-                  control={<Radio />}
-                  label="女性"
-                  defaultValue=""
-                />
-              </Row>
-            </RadioGroup>
-          }
-          name="gender"
-          control={control}
-          defaultValue=''
-        />
-      </InputLabel>
-      <InputLabel>
-        年齢
-        <Controller
-          as={
-            <Select error={"old" in errors} fullWidth defaultValue="">
-              {old_options.map(({ value, text }) => (
-                <MenuItem key={value} value={value}>
-                  {text}
-                </MenuItem>
-              ))}
-            </Select>
-          }
-          name="old"
-          control={control}
-        />
-      </InputLabel>
-      <TextField
-        label="上限"
-        type="number"
-        name="up_value"
-        margin="dense"
-        inputRef={register}
-        inputProps={{ min: 0 }}
-      />
-      <Button color="primary" variant="contained" type="submit">
+    <form onSubmit={handleSubmit(on_submit)}>
+      <label>性別</label>
+      <label>年齢</label>
+      <input type="number" name="up_value" ref={register} />
+      <button color="primary" type="submit">
         診断する
-      </Button>
-    </Form>
+      </button>
+    </form>
   );
 };
 

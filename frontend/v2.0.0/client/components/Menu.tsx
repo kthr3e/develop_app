@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import SwipeableViews from "react-swipeable-views";
-import { useTheme, AppBar, Tabs, Tab } from "@material-ui/core";
 import { MenuList } from "./MenuList";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { shop_state } from "../recoil";
 
 export const Menu = () => {
-  const theme = useTheme();
   const [value, setValue] = useState(0);
   const shop = useRecoilValue(shop_state);
 
@@ -21,27 +19,14 @@ export const Menu = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handle_change} variant="fullWidth">
-          {shop.map((label, i) => (
-            <Tab label={label} aria-controls={`tabpanel-${i}`} key={label} />
-          ))}
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handle_change_index}>
-        {shop.map((label, i) => (
-          <MenuList
-            key={label}
-            value={value}
-            index={i}
-            dir={theme.direction}
-            label={label}
-          />
-        ))}
-      </SwipeableViews>
+      {shop.map((label, i) => (
+        <MenuList
+          key={label}
+          value={value}
+          index={i}
+          label={label}
+        />
+      ))}
     </>
   );
 };

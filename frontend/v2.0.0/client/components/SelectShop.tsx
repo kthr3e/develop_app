@@ -1,4 +1,3 @@
-import { Checkbox } from "@material-ui/core";
 import React from "react";
 import { useSetRecoilState } from "recoil";
 import { shop_state } from "../recoil";
@@ -12,7 +11,8 @@ export const SelectShop = () => {
       {shop_list.map((shop) => (
         <label key={shop}>
           <span>{shop}</span>
-          <Checkbox
+          <input
+            type="checkbox"
             onChange={() =>
               set_shop((prev) => {
                 if (prev.includes(shop))

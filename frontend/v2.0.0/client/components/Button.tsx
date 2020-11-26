@@ -1,3 +1,4 @@
+import { relative } from "path";
 import React from "react";
 import styled from "styled-components";
 
@@ -9,14 +10,19 @@ export const Button = () => {
   );
 };
 
-const StyledButton = styled.button`
+const StyledButton = styled.a`
+  text-decoration: none;
   overflow: hidden;
   padding: 1.5rem 6rem;
-  color: #fff;
   border-radius: 0;
-  background: #000;
-  > span {
-    position: relative;
+  background: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  &:hover {
+    color: #fff;
   }
   &:before {
     position: absolute;
@@ -29,10 +35,13 @@ const StyledButton = styled.button`
     transition: all 0.5s ease-in-out;
     -webkit-transform: translateX(-96%);
     transform: translateX(-96%);
-    background: #eb6877;
+    background: #000;
   }
   &:hover:before {
     -webkit-transform: translateX(0%);
     transform: translateX(0%);
+  }
+  > span {
+    position: relative;
   }
 `;

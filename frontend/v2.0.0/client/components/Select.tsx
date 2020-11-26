@@ -19,13 +19,13 @@ export const Select = () => {
 
 const SelectContainer = styled.div`
   overflow: hidden;
-  width: 90%;
+  width: 40%;
   margin: 2em auto;
   text-align: center;
   position: relative;
   border: 1px solid #bbbbbb;
   border-radius: 2px;
-  background: #ffffff;
+  background: #000;
   &::before {
     position: absolute;
     top: 0.8em;
@@ -36,7 +36,7 @@ const SelectContainer = styled.div`
     content: "";
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #666666;
+    border-top: 6px solid #fff;
     pointer-events: none;
   }
   &::after {
@@ -46,12 +46,12 @@ const SelectContainer = styled.div`
     bottom: 0;
     width: 1px;
     content: "";
-    border-left: 1px solid #bbbbbb;
+    border-left: 1px solid #fff;
   }
   select {
     width: 100%;
     padding: 8px 38px 8px 8px;
-    color: #666666;
+    color: #fff;
     padding-right: 1em;
     cursor: pointer;
     text-indent: 0.01px;

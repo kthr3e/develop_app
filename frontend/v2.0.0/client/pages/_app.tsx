@@ -1,17 +1,10 @@
 import React, { useEffect } from "react";
 import { AppProps } from "next/app";
-import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
-import { ThemeProvider as MaterialUIThemeProvider } from "@material-ui/core/styles";
-import { StylesProvider } from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "styled-components";
 import { theme } from "../styles/theme";
 import "../styles/global.scss";
 import { RecoilRoot } from "recoil";
-import { Toast } from "../components/Toast";
 import { Footer } from "../components/Footer";
-import { Button } from "../components/Button";
-import { Select } from "../components/Select";
-import { Radio } from "../components/Radio";
 
 /**
  * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする
@@ -27,21 +20,12 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <StylesProvider injectFirst>
-      <MaterialUIThemeProvider theme={theme}>
-        <StyledComponentsThemeProvider theme={theme}>
-          <RecoilRoot>
-            <CssBaseline />
-            <Toast />
-            <Button/>
-            <Select/>
-            <Radio/>
-            <h1>栄養診断App v2.0.0</h1>
-            <Component {...pageProps} />
-            <Footer />
-          </RecoilRoot>
-        </StyledComponentsThemeProvider>
-      </MaterialUIThemeProvider>
-    </StylesProvider>
+    <ThemeProvider theme={theme}>
+      <RecoilRoot>
+        <h1>栄養診断App v2.0.0</h1>
+        <Component {...pageProps} />
+        <Footer />
+      </RecoilRoot>
+    </ThemeProvider>
   );
 }

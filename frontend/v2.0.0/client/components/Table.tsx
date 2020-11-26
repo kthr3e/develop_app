@@ -2,15 +2,6 @@ import React from "react";
 import { FC } from "react";
 import styled from "styled-components";
 import { COLOR } from "../styles/colors";
-import {
-  Paper,
-  Table as MaterialTable,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
 
 type Props = {
   value?: string[][];
@@ -21,35 +12,35 @@ type Props = {
  * 受け取ったvalueを基にテーブルで表示
  */
 export const Table: FC<Props> = ({ value, headers }) => (
-  <StyledTableContainer component={Paper}>
-    <MaterialTable>
+  <StyledTableContainer>
+    <table>
       <StyledTableHead>
-        <TableRow>
+        <tr>
           {headers.map((header) => (
-            <TableCell align="center" key={String(header)}>
+            <td align="center" key={String(header)}>
               {header}
-            </TableCell>
+            </td>
           ))}
-        </TableRow>
+        </tr>
       </StyledTableHead>
-      <TableBody>
+      <tbody>
         {value &&
           value
             .filter((el) => el[1] !== "0個")
             .map((el) => (
-              <TableRow key={String(el)}>
-                <TableCell align="center">{el[0]}</TableCell>
-                <TableCell align="center">{el[1]}</TableCell>
-              </TableRow>
+              <tr key={String(el)}>
+                <td align="center">{el[0]}</td>
+                <td align="center">{el[1]}</td>
+              </tr>
             ))}
-      </TableBody>
-    </MaterialTable>
+      </tbody>
+    </table>
   </StyledTableContainer>
 );
 
-const StyledTableContainer = styled(TableContainer)<any>`
+const StyledTableContainer = styled.div<any>`
   margin-bottom: 30px;
 `;
-const StyledTableHead = styled(TableHead)`
+const StyledTableHead = styled.thead`
   background-color: ${COLOR.SMOKE};
 `;
