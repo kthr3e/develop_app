@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { mac_menu } from "../util/MacMenu";
 import { dennys_menu } from "../util/DennysMenu";
 import styled from "styled-components";
-import { MenuItems } from "./MenuItems";
+import { MenuItem } from "./MenuItems";
 
 type Props = {
   label: string;
@@ -31,7 +31,6 @@ export const MenuList: FC<Props> = ({ label }) => {
       }
       arr.push(list.slice(i * NUM, i * NUM + NUM));
     }
-    console.log(arr);
     return arr;
   };
 
@@ -42,7 +41,7 @@ export const MenuList: FC<Props> = ({ label }) => {
       <List>
         {menu_list &&
           menu_list.map((menu, i) => (
-            <MenuItems key={i} menu={menu} index={i} />
+            <MenuItem key={i} menu={menu} index={i} />
           ))}
       </List>
     </>

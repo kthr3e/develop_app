@@ -1,7 +1,8 @@
+import { faPersonBooth } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
@@ -9,6 +10,7 @@ import { menu_value, ResultType, result_value, shop_state } from "../recoil";
 import { Row } from "../styles/common";
 import { old_options } from "../util/OldOptions";
 import { Button } from "./Button";
+import { InputNum } from "./InputNum";
 import { Radio } from "./Radio";
 import { Select } from "./Select";
 
@@ -24,9 +26,7 @@ export type FormData = {
  * 性別、年齢、上限などを入力するフォーム
  */
 export const UserDataForm = () => {
-  const { reset, handleSubmit, errors, register, control } = useForm<
-    FormData
-  >();
+  const methods = useForm<FormData>();
   const shop = useRecoilValue(shop_state);
   const menu = useRecoilValue(menu_value);
   const set_result_value = useSetRecoilState<ResultType>(result_value);
@@ -43,32 +43,40 @@ export const UserDataForm = () => {
       });
       console.log(res);
       set_result_value(res);
-      reset();
+      methods.reset();
       router.push("/result");
     } catch (res) {
       console.log(res);
     }
   };
+
   return (
-    <form onSubmit={handleSubmit(on_submit)}>
-      <label>
-        性別
-        <Radio />
-      </label>
-      <label>
-        年齢
+    <FormProvider {...methods}>
+      <Form onSubmit={methods.handleSubmit(on_submit)}>
+        <div
+          css={`
+            display: flex;
+            grid-area: gender;
+          `}>
+          性別
+          <Radio name="gender" icon={faPersonBooth} label="男性" />
+          <Radio name="gender" icon={faPersonBooth} label="女性" />
+        </div>
         <Select />
-      </label>
-      <input type="number" name="up_value" ref={register} />
-      <Button type="submit">診断する</Button>
-    </form>
+        <InputNum />
+        <Button type="submit">診断する</Button>
+      </Form>
+    </FormProvider>
   );
 };
 
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
+  display: grid;
+  grid-template:
+    "... gender gender ..." 150px
+    "... ... ... ..." 20px
+    "... old up_value ..." 100px
+    "... ... ... ..." 20px
+    "... button button ..." 100px
+    /1fr 400px 400px 1fr;
 `;

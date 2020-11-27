@@ -4,6 +4,8 @@ import "../styles/global.scss";
 import { RecoilRoot } from "recoil";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { Reset } from "styled-reset";
+import type {} from "styled-components/cssprop";
 
 /**
  * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする
@@ -20,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <RecoilRoot>
+      <Reset />
       <Header />
       <Component {...pageProps} />
       <Footer />

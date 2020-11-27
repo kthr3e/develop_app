@@ -3,21 +3,30 @@ import styled from "styled-components";
 
 export const Select = () => {
   return (
-    <SelectContainer>
-      <select required>
-        <option value="" hidden>
-          Choose
-        </option>
-        <option value="1">cat</option>
-        <option value="2">dog</option>
-        <option value="3">rabbit</option>
-        <option value="4">squirrel</option>
-      </select>
-    </SelectContainer>
+    <Label>
+      年齢
+      <SelectContainer>
+        <select required>
+          <option value="" hidden>
+            選択してください
+          </option>
+          <option value="1">cat</option>
+          <option value="2">dog</option>
+          <option value="3">rabbit</option>
+          <option value="4">squirrel</option>
+        </select>
+      </SelectContainer>
+    </Label>
   );
 };
 
-const SelectContainer = styled.div`
+const Label = styled.label`
+  display: flex;
+  grid-area: old;
+`;
+
+const SelectContainer = styled.label`
+  grid-area: old;
   overflow: hidden;
   width: 40%;
   margin: 2em auto;

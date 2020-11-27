@@ -15,6 +15,7 @@ export const Button: FC<Props> = ({ children, type }) => {
 };
 
 const StyledButton = styled.button`
+  grid-area: button;
   text-decoration: none;
   overflow: hidden;
   padding: 1.5rem 6rem;

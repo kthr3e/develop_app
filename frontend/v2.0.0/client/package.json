@@ -32,6 +32,7 @@
     "@types/recharts": "^1.8.16",
     "@types/recoil": "^0.0.1",
     "@types/styled-components": "^5.1.1",
-    "babel-plugin-styled-components": "^1.11.1"
+    "babel-plugin-styled-components": "^1.11.1",
+    "styled-reset": "^4.3.1"
   }
 }

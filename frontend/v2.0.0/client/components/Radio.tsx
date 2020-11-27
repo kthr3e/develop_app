@@ -1,49 +1,39 @@
-import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import {
+  faAddressBook,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useFormContext } from "react-hook-form";
 
-export const Radio = () => {
-  return (
-    <RadioContainer>
-      <RadioGroup>
-        <InputContainer>
-          <RadioButton type="radio" name="radio" />
-          <RadioTile>
-            <FontAwesomeIcon icon={faAddressBook} />
-            <RadioLabel htmlFor="walk">Walk</RadioLabel>
-          </RadioTile>
-        </InputContainer>
-
-        <InputContainer>
-          <RadioButton type="radio" name="radio" />
-          <RadioTile>
-            <FontAwesomeIcon icon={faAddressBook} />
-          </RadioTile>
-        </InputContainer>
-      </RadioGroup>
-    </RadioContainer>
-  );
+type Props = {
+  name: string;
+  icon: IconDefinition;
+  label: string;
 };
 
-const RadioContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
+export const Radio: FC<Props> = ({ name, icon, label }) => {
+  const { register } = useFormContext();
 
-const RadioGroup = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
+  return (
+    <InputContainer>
+      <RadioButton type="radio" name={name} ref={register} />
+      <RadioTile>
+        <FontAwesomeIcon icon={icon} />
+        <RadioLabel>{label}</RadioLabel>
+      </RadioTile>
+    </InputContainer>
+  );
+};
 
 const InputContainer = styled.div`
   position: relative;
   height: 7rem;
   width: 7rem;
   margin: 0.5rem;
+  background-color: black;
+  color: white;
 `;
 
 const RadioButton = styled.input`
@@ -73,12 +63,6 @@ const RadioTile = styled.div`
   border-radius: 5px;
   padding: 1rem;
   transition: transform 300ms ease;
-`;
-
-const Icon = styled.div`
-  fill: black;
-  width: 3rem;
-  height: 3rem;
 `;
 
 const RadioLabel = styled.label`

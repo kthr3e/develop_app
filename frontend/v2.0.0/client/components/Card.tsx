@@ -8,10 +8,10 @@ type Props = {
   name: string;
 };
 
-export const MenuItem: FC<Props> = ({ name }) => {
+export const Card: FC<Props> = ({ name }) => {
   const [menu, set_menu] = useRecoilState(menu_value);
   const include = menu.includes(name);
-  
+
   const handle_click = () => {
     if (include) {
       set_menu((prev) => prev.filter((el) => el !== name));
@@ -22,18 +22,18 @@ export const MenuItem: FC<Props> = ({ name }) => {
 
   return (
     <Label>
-      <Card>
+      <Container>
         <ImgFrame></ImgFrame>
-        <TextBox>
-          <CardTitle>{name}</CardTitle>
-        </TextBox>
-      </Card>
+        <TitleBox>
+          <Title>{name}</Title>
+        </TitleBox>
+      </Container>
       <input type="checkbox" onClick={handle_click} checked={include} hidden />
     </Label>
   );
 };
 
-const Card = styled.div`
+const Container = styled.div`
   width: 288px;
   height: auto;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
@@ -48,7 +48,7 @@ const ImgFrame = styled.div`
   box-sizing: border-box;
 `;
 
-const TextBox = styled.div`
+const TitleBox = styled.div`
   width: 100%;
   height: auto;
   padding: 20px 18px;
@@ -56,7 +56,7 @@ const TextBox = styled.div`
   box-sizing: border-box;
 `;
 
-const CardTitle = styled.div`
+const Title = styled.div`
   font-size: 20px;
   font-weight: bold;
   line-height: 125%;

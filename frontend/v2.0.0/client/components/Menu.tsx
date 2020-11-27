@@ -16,9 +16,11 @@ export const Menu = () => {
       <IconButton>
         <FontAwesomeIcon icon={faAngleLeft} />
       </IconButton>
-      {shop.map((label, i) => (
-        <MenuList key={label} label={label} />
-      ))}
+      <div>
+        {shop.map((label, i) => (
+          <MenuList key={label} label={label} />
+        ))}
+      </div>
       <IconButton>
         <FontAwesomeIcon icon={faAngleRight} />
       </IconButton>
@@ -35,4 +37,8 @@ const IconButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
+`;
+
+const MenuContainer = styled.div`
+  
 `;
