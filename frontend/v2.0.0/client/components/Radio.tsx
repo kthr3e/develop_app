@@ -1,5 +1,7 @@
+import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Radio = () => {
   return (
@@ -8,7 +10,7 @@ export const Radio = () => {
         <InputContainer>
           <RadioButton type="radio" name="radio" />
           <RadioTile>
-            <Icon>男 </Icon>
+            <FontAwesomeIcon icon={faAddressBook} />
             <RadioLabel htmlFor="walk">Walk</RadioLabel>
           </RadioTile>
         </InputContainer>
@@ -16,8 +18,7 @@ export const Radio = () => {
         <InputContainer>
           <RadioButton type="radio" name="radio" />
           <RadioTile>
-            <Icon>女</Icon>
-            <RadioLabel htmlFor="bike">Bike</RadioLabel>
+            <FontAwesomeIcon icon={faAddressBook} />
           </RadioTile>
         </InputContainer>
       </RadioGroup>

@@ -3,6 +3,7 @@ import { AppProps } from "next/app";
 import "../styles/global.scss";
 import { RecoilRoot } from "recoil";
 import { Footer } from "../components/Footer";
+import { Header } from "../components/Header";
 
 /**
  * Next.jsでstyled-componentsとMaterialUIがうまく表示されるようにする
@@ -19,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <RecoilRoot>
-      <h1>栄養診断App v2.0.0</h1>
+      <Header />
       <Component {...pageProps} />
       <Footer />
     </RecoilRoot>

@@ -22,24 +22,30 @@ export const MenuList: FC<Props> = ({ label }) => {
 
   const paginate = (list: { name: string }[]) => {
     const arr = [];
-    const NUM = 5;
+    const NUM = 6;
     if (list.length === 0) return;
     for (let i = 0; i < Math.floor(list.length); i++) {
-      if (list.length > i * NUM + NUM) {
+      if (i * NUM + NUM > list.length) {
         arr.push(list.slice(i * NUM, list.length));
+        break;
       }
       arr.push(list.slice(i * NUM, i * NUM + NUM));
     }
+    console.log(arr);
     return arr;
   };
 
   const menu_list = paginate(get_list());
 
   return (
-    <List>
-      {menu_list &&
-        menu_list.map((menu,i) => <MenuItems key={i} menu={menu} />)}
-    </List>
+    <>
+      <List>
+        {menu_list &&
+          menu_list.map((menu, i) => (
+            <MenuItems key={i} menu={menu} index={i} />
+          ))}
+      </List>
+    </>
   );
 };
 
