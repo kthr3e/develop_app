@@ -2,7 +2,7 @@ import { faPersonBooth } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
@@ -12,7 +12,7 @@ import { old_options } from "../util/OldOptions";
 import { Button } from "./Button";
 import { InputNum } from "./InputNum";
 import { Radio } from "./Radio";
-import { Select } from "./Select";
+import { OldSelect } from "./OldSelect";
 
 export type FormData = {
   gender: string;
@@ -62,7 +62,7 @@ export const UserDataForm = () => {
           <Radio name="gender" icon={faPersonBooth} label="男性" />
           <Radio name="gender" icon={faPersonBooth} label="女性" />
         </div>
-        <Select />
+        <OldSelect />
         <InputNum />
         <Button type="submit">診断する</Button>
       </Form>

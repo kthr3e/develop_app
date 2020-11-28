@@ -30,5 +30,5 @@ const HeaderContainer = styled.div`
 `;
 
 const LayoutHeader = styled.div`
-  padding-bottom: 100px;
+  padding-bottom: 130px;
 `;

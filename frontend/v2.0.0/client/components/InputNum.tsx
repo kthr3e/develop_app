@@ -57,6 +57,9 @@ const InputBox = styled.div`
     height: 60px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
     -webkit-appearance: none;
+    background-color: black;
+    color: white;
+    font-size: 20px;
 
     &:focus {
       outline: none;

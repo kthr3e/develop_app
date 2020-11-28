@@ -24,9 +24,7 @@ export const Card: FC<Props> = ({ name }) => {
     <Label>
       <Container>
         <ImgFrame></ImgFrame>
-        <TitleBox>
-          <Title>{name}</Title>
-        </TitleBox>
+        <TitleBox>{name}</TitleBox>
       </Container>
       <input type="checkbox" onClick={handle_click} checked={include} hidden />
     </Label>
@@ -34,7 +32,7 @@ export const Card: FC<Props> = ({ name }) => {
 };
 
 const Container = styled.div`
-  width: 288px;
+  width: 150px;
   height: auto;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
 `;
@@ -56,15 +54,6 @@ const TitleBox = styled.div`
   box-sizing: border-box;
 `;
 
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 125%;
-`;
-
 const Label = styled.label`
-  width: 25%;
-  ${sp`
-    width: 50%;
-  `}
+  width: 33%;
 `;

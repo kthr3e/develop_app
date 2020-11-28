@@ -7,15 +7,24 @@ import { Card } from "./Card";
 
 type Props = {
   menu: { name: string }[];
-  index: number;
+  active: boolean;
 };
 
-export const MenuItem: FC<Props> = ({ menu, index }) => {
+export const MenuItem: FC<Props> = ({ menu, active }) => {
   return (
-    <>
+    <Page active={active}>
       {menu.map(({ name }) => (
         <Card name={name} key={name} />
       ))}
-    </>
+    </Page>
   );
 };
+
+const Page = styled.div<{ active: boolean }>`
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 1000px;
+  margin: 0 auto;
+  ${({ active }) => !active && `display: none;`};
+`;

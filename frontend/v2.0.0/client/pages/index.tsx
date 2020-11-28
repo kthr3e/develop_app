@@ -8,7 +8,7 @@ import { Result } from "../components/Result";
 export default function Home() {
   return (
     <Container>
-      <h3>1日に必要な栄養を取るためのメニューを診断！</h3>
+      <h2>1日に必要な栄養を取るためのメニューを診断！</h2>
       <p>
         あなたに必要な1日の栄養のうち、選んだメニューがどれだけ補えるか（充足率）をチェックすることができます。
       </p>

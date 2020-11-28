@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { old_options } from "../util/OldOptions";
 
-export const Select = () => {
+export const OldSelect = () => {
   return (
     <Label>
       年齢
       <SelectContainer>
-        <select required>
-          <option value="" hidden>
-            選択してください
-          </option>
-          <option value="1">cat</option>
-          <option value="2">dog</option>
-          <option value="3">rabbit</option>
-          <option value="4">squirrel</option>
+        <select>
+          {old_options.map(({ value, text, hidden }) => (
+            <option value={value} hidden={hidden}>
+              {text}
+            </option>
+          ))}
         </select>
       </SelectContainer>
     </Label>
