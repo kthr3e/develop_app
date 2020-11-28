@@ -23,8 +23,7 @@ export const MenuItem: FC<Props> = ({ menu, active }) => {
 const Page = styled.div<{ active: boolean }>`
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
+  justify-content: space-evenly;
   width: 1000px;
-  margin: 0 auto;
   ${({ active }) => !active && `display: none;`};
 `;

@@ -1,13 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { old_options } from "../util/OldOptions";
 
-export const OldSelect = () => {
+type Props = {
+  register: any;
+};
+
+export const OldSelect: FC<Props> = ({ register }) => {
   return (
     <Label>
       年齢
       <SelectContainer>
-        <select>
+        <select ref={register}>
           {old_options.map(({ value, text, hidden }) => (
             <option value={value} hidden={hidden}>
               {text}

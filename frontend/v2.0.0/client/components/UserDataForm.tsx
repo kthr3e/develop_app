@@ -26,7 +26,7 @@ export type FormData = {
  * 性別、年齢、上限などを入力するフォーム
  */
 export const UserDataForm = () => {
-  const methods = useForm<FormData>();
+  const { reset, register, handleSubmit, errors } = useForm<FormData>();
   const shop = useRecoilValue(shop_state);
   const menu = useRecoilValue(menu_value);
   const set_result_value = useSetRecoilState<ResultType>(result_value);
@@ -43,7 +43,7 @@ export const UserDataForm = () => {
       });
       console.log(res);
       set_result_value(res);
-      methods.reset();
+      reset();
       router.push("/result");
     } catch (res) {
       console.log(res);
@@ -51,22 +51,31 @@ export const UserDataForm = () => {
   };
 
   return (
-    <FormProvider {...methods}>
-      <Form onSubmit={methods.handleSubmit(on_submit)}>
-        <div
-          css={`
-            display: flex;
-            grid-area: gender;
-          `}>
-          性別
-          <Radio name="gender" icon={faPersonBooth} label="男性" />
-          <Radio name="gender" icon={faPersonBooth} label="女性" />
-        </div>
-        <OldSelect />
-        <InputNum />
-        <Button type="submit">診断する</Button>
-      </Form>
-    </FormProvider>
+    <Form onSubmit={handleSubmit(on_submit)}>
+      <div
+        css={`
+          display: flex;
+          grid-area: gender;
+          justify-content: center;
+        `}>
+        性別
+        <Radio
+          name="gender"
+          icon={faPersonBooth}
+          label="男性"
+          register={register}
+        />
+        <Radio
+          name="gender"
+          icon={faPersonBooth}
+          label="女性"
+          register={register}
+        />
+      </div>
+      <OldSelect register={register} />
+      <InputNum register={register} />
+      <Button type="submit">診断する</Button>
+    </Form>
   );
 };
 

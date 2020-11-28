@@ -1,9 +1,11 @@
-import React from "react";
-import { useFormContext } from "react-hook-form";
+import React, { FC } from "react";
 import styled from "styled-components";
 
-export const InputNum = () => {
-  const { register } = useFormContext();
+type Props = {
+  register: any;
+};
+
+export const InputNum: FC<Props> = ({ register }) => {
   return (
     <Label>
       上限

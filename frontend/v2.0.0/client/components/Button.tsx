@@ -26,6 +26,7 @@ const StyledButton = styled.button`
   line-height: 1.5;
   position: relative;
   display: inline-block;
+  cursor: pointer;
   &:hover {
     color: #fff;
   }

@@ -30,11 +30,6 @@ export const Menu = () => {
 
   return (
     <>
-      <IconButton
-        disabled={page === 1}
-        onClick={() => set_page((prev) => prev - 1)}>
-        <FontAwesomeIcon icon={faAngleLeft} />
-      </IconButton>
       <Tabs>
         {shop_list.map(({ name, id }) => (
           <Tab onClick={() => set_active(id)} active={active === id} key={id}>
@@ -42,17 +37,24 @@ export const Menu = () => {
           </Tab>
         ))}
       </Tabs>
-      {shop_list.map(({ id, menu }) => (
-        <Content active={active === id} key={id}>
-          <MenuList menu={menu} page={page} />
-        </Content>
-      ))}
+      <Container>
+        <IconButton
+          disabled={page === 1}
+          onClick={() => set_page((prev) => prev - 1)}>
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </IconButton>
+        {shop_list.map(({ id, menu }) => (
+          <Content active={active === id} key={id}>
+            <MenuList menu={menu} page={page} />
+          </Content>
+        ))}
+        <IconButton
+          disabled={page === shop_list[active].menu.length}
+          onClick={() => set_page((prev) => prev + 1)}>
+          <FontAwesomeIcon icon={faAngleRight} />
+        </IconButton>
+      </Container>
       <p>{`${page}/${shop_list[active].menu.length}`}</p>
-      <IconButton
-        disabled={page === shop_list[active].menu.length}
-        onClick={() => set_page((prev) => prev + 1)}>
-        <FontAwesomeIcon icon={faAngleRight} />
-      </IconButton>
     </>
   );
 };
@@ -60,7 +62,6 @@ export const Menu = () => {
 const Tabs = styled.div`
   overflow: hidden;
   background: #fff;
-  font-family: Open Sans;
   height: 3em;
 `;
 
@@ -73,21 +74,31 @@ const Tab = styled.button<{ active: boolean }>`
 
   margin-right: 0.1em;
   font-size: 1em;
-  border: ${(props) => (props.active ? "1px solid #ccc" : "")};
-  border-bottom: ${(props) => (props.active ? "none" : "")};
-  background-color: ${(props) => (props.active ? "white" : "lightgray")};
-  height: ${(props) => (props.active ? "3em" : "2.6em; top:.4em")};
+  ${({ active }) =>
+    active
+      ? `
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: white;
+    height: 30px;
+  `
+      : `
+    height: 26px;
+    top: 4px;
+  `}
   transition: background-color 0.5s ease-in-out;
 
   :hover {
     background-color: white;
   }
 `;
+
 const Content = styled.div<{ active: boolean }>`
-  ${(props) => !props.active && "display:none"}
+  ${({ active }) => !active && "display: none"}
 `;
 
-const IconButton = styled.button`
+const IconButton = styled.button<{ disabled: boolean }>`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,4 +107,17 @@ const IconButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  outline: none;
+  ${({ disabled }) =>
+    disabled &&
+    `
+    opacity: 0.3;
+    cursor: not-allowed;
+  `}
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

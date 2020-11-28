@@ -8,14 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormContext } from "react-hook-form";
 
 type Props = {
-  name: string;
+  name?: string;
   icon: IconDefinition;
   label: string;
+  register?: any;
 };
 
-export const Radio: FC<Props> = ({ name, icon, label }) => {
-  const { register } = useFormContext();
-
+export const Radio: FC<Props> = ({ name, icon, label, register }) => {
   return (
     <InputContainer>
       <RadioButton type="radio" name={name} ref={register} />
@@ -32,8 +31,11 @@ const InputContainer = styled.div`
   height: 7rem;
   width: 7rem;
   margin: 0.5rem;
-  background-color: black;
-  color: white;
+  &:checked {
+    color: white;
+    transform: scale(1.1, 1.1);
+    background-color: black;
+  }
 `;
 
 const RadioButton = styled.input`
@@ -45,11 +47,6 @@ const RadioButton = styled.input`
   width: 100%;
   margin: 0;
   cursor: pointer;
-  &:checked {
-    color: white;
-    transform: scale(1.1, 1.1);
-    background-color: black;
-  }
 `;
 
 const RadioTile = styled.div`

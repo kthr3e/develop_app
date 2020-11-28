@@ -21,12 +21,13 @@ const HeaderContainer = styled.div`
   background-color: black;
   color: lightgray;
   padding-left: 30px;
-  h3 {
-    margin-left: 10px;
-  }
   position: fixed;
   width: 100%;
   height: 100px;
+  z-index: 100;
+  h3 {
+    margin-left: 10px;
+  }
 `;
 
 const LayoutHeader = styled.div`

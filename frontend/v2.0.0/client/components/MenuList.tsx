@@ -20,5 +20,5 @@ export const MenuList: FC<Props> = ({ menu, page }) => {
 const List = styled.div`
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
+  height: auto;
 `;
