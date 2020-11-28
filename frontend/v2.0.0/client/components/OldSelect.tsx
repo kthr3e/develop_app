@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { LabelText } from "../styles/common";
 import { old_options } from "../util/OldOptions";
 
 type Props = {
@@ -9,11 +10,11 @@ type Props = {
 export const OldSelect: FC<Props> = ({ register }) => {
   return (
     <Label>
-      年齢
+      <LabelText>年齢</LabelText>
       <SelectContainer>
-        <select ref={register}>
+        <select name="old" ref={register({ required: true })}>
           {old_options.map(({ value, text, hidden }) => (
-            <option value={value} hidden={hidden}>
+            <option key={value} value={value} hidden={hidden}>
               {text}
             </option>
           ))}
@@ -25,14 +26,11 @@ export const OldSelect: FC<Props> = ({ register }) => {
 
 const Label = styled.label`
   display: flex;
-  grid-area: old;
 `;
 
 const SelectContainer = styled.label`
-  grid-area: old;
   overflow: hidden;
   width: 40%;
-  margin: 2em auto;
   text-align: center;
   position: relative;
   border: 1px solid #bbbbbb;
@@ -62,6 +60,7 @@ const SelectContainer = styled.label`
   }
   select {
     width: 100%;
+    height: 60px;
     padding: 8px 38px 8px 8px;
     color: #fff;
     padding-right: 1em;

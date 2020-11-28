@@ -1,17 +1,17 @@
 import { faPersonBooth } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 import { useRouter } from "next/dist/client/router";
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import React, { FC } from "react";
+import { useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { menu_value, ResultType, result_value, shop_state } from "../recoil";
-import { Row } from "../styles/common";
-import { old_options } from "../util/OldOptions";
+import { LabelText, Row } from "../styles/common";
 import { Button } from "./Button";
+import { GenderRadio } from "./GenderRadio";
 import { InputNum } from "./InputNum";
-import { Radio } from "./Radio";
+import { MethodRadio } from "./MethodRadio";
 import { OldSelect } from "./OldSelect";
 
 export type FormData = {
@@ -22,70 +22,54 @@ export type FormData = {
   shop: string[];
 };
 
+type Props = {
+  method: "menu" | "shop";
+};
+
 /**
  * 性別、年齢、上限などを入力するフォーム
  */
-export const UserDataForm = () => {
+export const UserDataForm: FC<Props> = ({ method }) => {
   const { reset, register, handleSubmit, errors } = useForm<FormData>();
   const shop = useRecoilValue(shop_state);
   const menu = useRecoilValue(menu_value);
   const set_result_value = useSetRecoilState<ResultType>(result_value);
+  const router = useRouter();
 
   const on_submit = async (data: FormData) => {
-    const router = useRouter();
     console.log(data);
-    try {
-      data["shop"] = shop;
-      data["menu"] = menu;
-      console.log(data);
-      const res = await Axios.post("http://localhost:5000/api/check", {
-        data,
-      });
-      console.log(res);
-      set_result_value(res);
-      reset();
-      router.push("/result");
-    } catch (res) {
-      console.log(res);
-    }
+    // try {
+    //   data["shop"] = method === "shop" ? shop : ["macdonalds", "denneys"];
+    //   data["menu"] = menu;
+    //   console.log(data);
+    //   const res = await Axios.post("http://localhost:5000/api/check", {
+    //     data,
+    //   });
+    //   console.log(res);
+    //   set_result_value(res);
+    //   reset();
+    //   router.push("/result");
+    // } catch (res) {
+    //   console.log(res);
+    // }
   };
 
   return (
     <Form onSubmit={handleSubmit(on_submit)}>
+      <LabelText>性別</LabelText>
       <div
         css={`
           display: flex;
-          grid-area: gender;
-          justify-content: center;
         `}>
-        性別
-        <Radio
-          name="gender"
-          icon={faPersonBooth}
-          label="男性"
-          register={register}
-        />
-        <Radio
-          name="gender"
-          icon={faPersonBooth}
-          label="女性"
-          register={register}
-        />
+        <GenderRadio register={register} />
+        <div>
+          <OldSelect register={register} />
+          <InputNum register={register} />
+        </div>
       </div>
-      <OldSelect register={register} />
-      <InputNum register={register} />
       <Button type="submit">診断する</Button>
     </Form>
   );
 };
 
-const Form = styled.form`
-  display: grid;
-  grid-template:
-    "... gender gender ..." 150px
-    "... ... ... ..." 20px
-    "... old up_value ..." 100px
-    "... ... ... ..." 20px
-    "... button button ..." 100px
-    /1fr 400px 400px 1fr;
-`;
+const Form = styled.form``;

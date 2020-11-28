@@ -11,3 +11,9 @@ export const Column = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+export const LabelText = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+`;

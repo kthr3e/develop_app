@@ -24,6 +24,5 @@ const Page = styled.div<{ active: boolean }>`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  width: 1000px;
   ${({ active }) => !active && `display: none;`};
 `;

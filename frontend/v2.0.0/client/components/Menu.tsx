@@ -39,6 +39,9 @@ export const Menu = () => {
       </Tabs>
       <Container>
         <IconButton
+          css={`
+            left: 0;
+          `}
           disabled={page === 1}
           onClick={() => set_page((prev) => prev - 1)}>
           <FontAwesomeIcon icon={faAngleLeft} />
@@ -49,6 +52,9 @@ export const Menu = () => {
           </Content>
         ))}
         <IconButton
+          css={`
+            right: 0;
+          `}
           disabled={page === shop_list[active].menu.length}
           onClick={() => set_page((prev) => prev + 1)}>
           <FontAwesomeIcon icon={faAngleRight} />
@@ -69,10 +75,8 @@ const Tab = styled.button<{ active: boolean }>`
   border: none;
   outline: none;
   cursor: pointer;
-  width: 40%;
+  width: 50%;
   position: relative;
-
-  margin-right: 0.1em;
   font-size: 1em;
   ${({ active }) =>
     active
@@ -94,6 +98,8 @@ const Tab = styled.button<{ active: boolean }>`
 `;
 
 const Content = styled.div<{ active: boolean }>`
+  width: 90%;
+  margin: 0 auto;
   ${({ active }) => !active && "display: none"}
 `;
 
@@ -108,6 +114,8 @@ const IconButton = styled.button<{ disabled: boolean }>`
   height: 50px;
   border-radius: 50%;
   outline: none;
+  position: absolute;
+  top: calc(50% - 25px);
   ${({ disabled }) =>
     disabled &&
     `
@@ -117,7 +125,5 @@ const IconButton = styled.button<{ disabled: boolean }>`
 `;
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 `;

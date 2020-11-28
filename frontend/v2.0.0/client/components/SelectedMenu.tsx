@@ -13,7 +13,7 @@ export const SelectedMenu = () => {
   return (
     <Container>
       {menu.map((name) => (
-        <Label onClick={() => handle_click(name)}>
+        <Label onClick={() => handle_click(name)} key={name}>
           <ImgFrame>
             <Image src="/images/burger.png" height="auto" width="auto" />
           </ImgFrame>

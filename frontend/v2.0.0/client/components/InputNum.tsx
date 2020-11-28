@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { LabelText } from "../styles/common";
 
 type Props = {
   register: any;
@@ -7,19 +8,16 @@ type Props = {
 
 export const InputNum: FC<Props> = ({ register }) => {
   return (
-    <Label>
-      上限
+    <label>
+      <LabelText>上限</LabelText>
       <InputBox>
         <input type="number" name="up_value" ref={register} min={1} max={30} />
       </InputBox>
-    </Label>
+    </label>
   );
 };
 
-const Label = styled.label`
-  display: flex;
-  grid-area: up_value;
-`;
+
 
 const InputBox = styled.div`
   width: 150px;
