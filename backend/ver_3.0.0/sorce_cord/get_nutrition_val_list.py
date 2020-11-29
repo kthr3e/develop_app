@@ -6,5 +6,6 @@ def get_nutrition_val_list(nutrition_dict, target_menu_list, eiyou_name):
         #　栄養価を取得してfloatに変換
         if eiyou_name in nutrition_dict[menu_name]:
             eiyou_val = nutrition_dict[menu_name][eiyou_name]
+            print(menu_name,eiyou_name,eiyou_val)
             result_list.append(float(eiyou_val))
     return result_list
