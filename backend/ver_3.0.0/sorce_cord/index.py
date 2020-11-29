@@ -13,40 +13,13 @@ def index():
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-    data = {"shop":["dennys","macdonalds"]}
+    data = {"shop":["mos"]}
     MenuDict = menu_dict(data["shop"])
     #print("wx: ",MenuDict)
 
     # メニューリストを自動で取得するようにする。のちに選択式になる予定。
 
-    data = {"menu":["てりやきマックバーガー",
-        "ハンバーガー",
-        "チーズバーガー",
-        "ベーコンレタスバーガー",
-        "チキンフィレオ",
-        "えびフィレオ",
-        "フィレオフィッシュ",
-        "ダブルチーズバーガー",
-        "ビッグマック",
-        "チキンマックナゲット 5ピース",
-        "マックフライポテト(L)",
-        "マックフライポテト(M)",
-        "マックフライポテト(S)",
-        "ホットアップルパイ",
-        "ワッフルコーン プレーン",
-        "マックフルーリーオレオ",
-        "プチパンケーキ",
-        "三角チョコパイ 黒",
-        "スイートコーン",
-        "サイドサラダ",
-        "ハッシュポテト",
-        "コカ・コーラ",
-        "アイスカフェラテ",
-        "キャラメルラテ",
-        "マックシェイクバニラ",
-        "マックシェイクチョコレート",
-        "ミニッツメイドオレンジ",
-        ]}
+    data = {"menu":[]}
 
     if not data["menu"]:
         target_menu_list = list(MenuDict.keys())
@@ -71,6 +44,7 @@ def index():
         #　変数名ごとに表示
         print("「一日に必要な栄養素を摂取するには」")
         for x in xs:
+            #print(x)
             if int(x.value()) != 0:
                 #print("x.value:",x.value)
                 print(str(x),":",str(int(x.value())),"個")
@@ -89,7 +63,8 @@ def index():
         #　変数名ごとに表示
         print("追加でこんなメニューはどうですか")
         for x in xs:
-            if int(x.value()) != 0:
+            #print(x,x.value())
+            if x.value() != None and int(x.value()) != 0:
                 #print("x.value:",x.value)
                 print(str(x),":",str(int(x.value())),"個")
 

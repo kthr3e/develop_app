@@ -7,4 +7,5 @@ def get_nutrition_val_list(nutrition_dict, target_menu_list, eiyou_name):
         if eiyou_name in nutrition_dict[menu_name]:
             eiyou_val = nutrition_dict[menu_name][eiyou_name]
             result_list.append(float(eiyou_val))
+        #print(nutrition_dict[menu_name])
     return result_list
