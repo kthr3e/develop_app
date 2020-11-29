@@ -18,7 +18,7 @@ export const Table: FC<Props> = ({ result }) => {
           Object.entries(result)
             .filter((el) => el[1] !== "0個")
             .map((el) => (
-              <tr>
+              <tr key={String(el)}>
                 <td>{el[0]}</td>
                 <td>{el[1].replace("個", "")}</td>
               </tr>

@@ -15,7 +15,7 @@ export const Shop = () => {
     {
       name: "モスバーガー",
       value: "mos",
-    }
+    },
   ];
 
   return (
@@ -28,7 +28,7 @@ export const Shop = () => {
 };
 
 const ShopContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
 `;

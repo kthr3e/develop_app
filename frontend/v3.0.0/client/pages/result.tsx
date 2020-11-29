@@ -27,8 +27,11 @@ export default function Result() {
         `}>
         診断結果
       </Text>
-      {result === "error" ? (
-        <h1>そんな都合のいいメニューはありません！</h1>
+      {result.length === 1 ? (
+        <>
+          <Text>こんなメニューはいかがですか？</Text>
+          <Table result={result[0] as { [name: string]: string }} />
+        </>
       ) : (
         <Container>
           <Chart result={result[1] as { [name: string]: string }} />

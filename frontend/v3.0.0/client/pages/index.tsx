@@ -7,7 +7,6 @@ import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Desc, Text } from "../styles/common";
 import { Shop } from "../components/Shop";
-import { sp } from "../styles/media";
 
 export default function Home() {
   const [method, set_method] = useState<"menu" | "shop">("menu");
