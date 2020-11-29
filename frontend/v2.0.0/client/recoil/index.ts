@@ -1,12 +1,14 @@
 import { atom } from "recoil";
 
-export type ResultType = {
-  data: { [name: string]: string[] };
-};
+export type ResultType =
+  | {
+      [name: string]: string;
+    }[]
+  | string;
 
 export const result_value = atom<ResultType>({
   key: "result_value",
-  default: {} as ResultType,
+  default: [] as ResultType,
 });
 
 export const menu_value = atom<string[]>({
@@ -15,6 +17,6 @@ export const menu_value = atom<string[]>({
 });
 
 export const shop_state = atom<string[]>({
-    key: "shop_state",
-    default: []
-})
+  key: "shop_state",
+  default: [],
+});

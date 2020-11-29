@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { FC } from "react";
 import {
   Radar,
   RadarChart,
@@ -8,69 +8,52 @@ import {
   PolarRadiusAxis,
 } from "recharts";
 
-const data = [
-  {
-    subject: "Math",
-    A: 120,
-    B: 110,
-    fullMark: 150,
-  },
-  {
-    subject: "Chinese",
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: "English",
-    A: 86,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: "Geography",
-    A: 99,
-    B: 100,
-    fullMark: 150,
-  },
-  {
-    subject: "Physics",
-    A: 85,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: "History",
-    A: 65,
-    B: 85,
-    fullMark: 150,
-  },
-];
+type Props = {
+  result: { [name: string]: string };
+};
 
-export const Chart = () => {
+export const Chart: FC<Props> = ({ result }) => {
+  const data = () => {
+    const arr: { subject: string; A: number; B: number }[] = [];
+    let i = 0;
+    for (const key in result) {
+      const values = result[key].split("に対し");
+      arr[i] = {
+        subject: key,
+        A: (parseFloat(values[1]) / parseFloat(values[0])) * 100,
+        B: 100,
+      };
+      i++;
+    }
+    console.log(arr);
+    return arr;
+  };
+
+  console.log(data());
+
   return (
     <RadarChart
       cx={300}
       cy={250}
-      outerRadius={150}
-      width={500}
+      outerRadius={100}
+      width={600}
       height={500}
-      data={data}>
+      data={data()}>
       <PolarGrid />
       <PolarAngleAxis dataKey="subject" />
-      <PolarRadiusAxis angle={30} domain={[0, 150]} />
+      <PolarRadiusAxis angle={30} domain={[0, 100]} />
       <Radar
-        name="Mike"
+        name="充足率"
         dataKey="A"
         stroke="#8884d8"
         fill="#8884d8"
         fillOpacity={0.6}
       />
       <Radar
-        name="Lily"
+        name="100%"
         dataKey="B"
-        stroke="#82ca9d"
-        fill="#82ca9d"
+        stroke="red"
+        fill="transparent"
         fillOpacity={0.6}
       />
       <Legend />

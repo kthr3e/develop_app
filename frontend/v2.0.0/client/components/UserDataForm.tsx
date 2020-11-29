@@ -42,12 +42,11 @@ export const UserDataForm: FC<Props> = ({ method }) => {
     try {
       data["shop"] = method === "shop" ? shop : ["macdonalds", "dennys"];
       data["menu"] = menu;
-      console.log(data);
       const res = await Axios.post("http://localhost:5000/api/check", {
         data,
       });
       console.log(res);
-      set_result_value(res);
+      set_result_value(res.data);
       reset();
       router.push("/result");
     } catch (res) {

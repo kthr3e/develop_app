@@ -56,5 +56,6 @@ export default function Home() {
 const Container = styled.div`
   text-align: center;
   width: 80%;
+  max-width: 900px;
   margin: 0 auto;
 `;
