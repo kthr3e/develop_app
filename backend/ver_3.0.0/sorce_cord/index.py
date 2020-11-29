@@ -44,6 +44,7 @@ def index():
         #　変数名ごとに表示
         print("「一日に必要な栄養素を摂取するには」")
         for x in xs:
+            #print(x)
             if int(x.value()) != 0:
                 #print("x.value:",x.value)
                 print(str(x),":",str(int(x.value())),"個")
@@ -62,7 +63,8 @@ def index():
         #　変数名ごとに表示
         print("追加でこんなメニューはどうですか")
         for x in xs:
-            if int(x.value()) != 0:
+            #print(x,x.value())
+            if x.value() != None and int(x.value()) != 0:
                 #print("x.value:",x.value)
                 print(str(x),":",str(int(x.value())),"個")
 
