@@ -29,24 +29,19 @@ export default function Home() {
         `}>
         <MethodRadio
           icon={faBookOpen}
-          label="メニュー"
+          label="メニューから選択"
           checked={method === "menu"}
           handle_click={() => set_method("menu")}
         />
         <MethodRadio
           icon={faStore}
-          label="店"
+          label="店から選択"
           checked={method === "shop"}
           handle_click={() => set_method("shop")}
         />
       </div>
       {method === "menu" ? <Menu /> : <Shop />}
-      {method === "menu" && (
-        <>
-          <Text>選択したメニュー</Text>
-          <SelectedMenu />
-        </>
-      )}
+      {method === "menu" && <SelectedMenu />}
       <Text>2.基本情報を入力</Text>
       <UserDataForm method={method} />
     </Container>

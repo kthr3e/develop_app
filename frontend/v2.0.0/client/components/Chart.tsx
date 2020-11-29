@@ -33,11 +33,11 @@ export const Chart: FC<Props> = ({ result }) => {
 
   return (
     <RadarChart
-      cx={300}
-      cy={250}
-      outerRadius={100}
-      width={600}
-      height={500}
+      cx={200}
+      cy={150}
+      outerRadius={60}
+      width={300}
+      height={300}
       data={data()}>
       <PolarGrid />
       <PolarAngleAxis dataKey="subject" />
