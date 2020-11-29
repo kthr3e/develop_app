@@ -1,9 +1,15 @@
 type OldOptionType = {
   value: string;
   text: string;
+  hidden?: boolean;
 };
 
 export const old_options: OldOptionType[] = [
+  {
+    value: "",
+    text: "選択してください",
+    hidden: true,
+  },
   {
     value: "0",
     text: "3-5歳",

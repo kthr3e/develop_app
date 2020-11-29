@@ -9,6 +9,7 @@ export const Footer = () => {
       <p>
         {"Copyright © "}
         <br />
+        <br />
         {"Created by "}
         <Link href="https://github.com/">Kthr3e</Link>
         {" & "}
@@ -26,9 +27,8 @@ const StyledFooter = styled.footer`
   text-align: center;
   color: ${COLOR.WHITE};
   background-color: ${COLOR.BLACK};
-  height: 100px;
   padding: 5px;
-  p {
-    margin: 0;
+  > p {
+    margin: 30px 0;
   }
 `;
