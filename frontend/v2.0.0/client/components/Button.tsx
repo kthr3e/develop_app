@@ -5,11 +5,12 @@ import { sp } from "../styles/media";
 
 type Props = {
   type?: "button" | "submit";
+  handle_click?: () => void;
 };
 
-export const Button: FC<Props> = ({ children, type }) => {
+export const Button: FC<Props> = ({ children, type, handle_click }) => {
   return (
-    <StyledButton type={type}>
+    <StyledButton type={type} onClick={handle_click}>
       <span>{children}</span>
     </StyledButton>
   );

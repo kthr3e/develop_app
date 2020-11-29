@@ -61,11 +61,9 @@ const Label = styled.label<{ include: boolean }>`
   cursor: pointer;
   border-radius: 5px;
   overflow: hidden;
-  ${({ include }) =>
-    include && `box-shadow: none; opacity: 0.3;`};
+  ${({ include }) => include && `box-shadow: none; opacity: 0.3;`};
   ${tab`
     width: 25%;
-    height: 200px;
   `}
   ${sp`
     width: 40%;
@@ -77,21 +75,29 @@ const ImgFrame = styled.div`
   width: 100%;
   box-sizing: border-box;
   padding-top: 20px;
+  ${tab`
+    padding-top: 0;
+    div {
+      height: 100px;
+    }
+  `};
   ${sp`
     padding-top: 0;
     div {
       height: 80px;
     }
-  `}
+  `};
 `;
 
 const TitleBox = styled.div`
   width: 100%;
   padding: 20px 18px;
   box-sizing: border-box;
+  ${tab`
+    padding: 0 10px 10px 10px;
+  `};
   ${sp`
     font-size: 12px;
-    padding: 10px;
-    padding-top: 0;
-  `}
+    padding: 0 10px 10px 10px;
+  `};
 `;
