@@ -38,6 +38,7 @@ const InputContainer = styled.label<{ checked: boolean }>`
     color: white;
     transform: scale(1.1, 1.1);
     background-color: black;
+    border-radius: 5px;
   `}
   cursor: pointer;
 `;

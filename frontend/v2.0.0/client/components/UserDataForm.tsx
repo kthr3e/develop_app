@@ -7,7 +7,8 @@ import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { menu_value, ResultType, result_value, shop_state } from "../recoil";
-import { LabelText, Row } from "../styles/common";
+import { Text, Row } from "../styles/common";
+import { sp } from "../styles/media";
 import { Button } from "./Button";
 import { GenderRadio } from "./GenderRadio";
 import { InputNum } from "./InputNum";
@@ -38,31 +39,45 @@ export const UserDataForm: FC<Props> = ({ method }) => {
 
   const on_submit = async (data: FormData) => {
     console.log(data);
-    // try {
-    //   data["shop"] = method === "shop" ? shop : ["macdonalds", "denneys"];
-    //   data["menu"] = menu;
-    //   console.log(data);
-    //   const res = await Axios.post("http://localhost:5000/api/check", {
-    //     data,
-    //   });
-    //   console.log(res);
-    //   set_result_value(res);
-    //   reset();
-    //   router.push("/result");
-    // } catch (res) {
-    //   console.log(res);
-    // }
+    try {
+      data["shop"] = method === "shop" ? shop : ["macdonalds", "dennys"];
+      data["menu"] = menu;
+      console.log(data);
+      const res = await Axios.post("http://localhost:5000/api/check", {
+        data,
+      });
+      console.log(res);
+      set_result_value(res);
+      reset();
+      router.push("/result");
+    } catch (res) {
+      console.log(res);
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit(on_submit)}>
-      <LabelText>性別</LabelText>
       <div
         css={`
           display: flex;
+          margin-bottom: 100px;
+          ${sp`
+            flex-direction: column;
+          `}
         `}>
-        <GenderRadio register={register} />
-        <div>
+        <div
+          css={`
+            flex: 1;
+            margin: 0 20px;
+          `}>
+          <Text>性別</Text>
+          <GenderRadio register={register} />
+        </div>
+        <div
+          css={`
+            flex: 1;
+            margin: 0 20px;
+          `}>
           <OldSelect register={register} />
           <InputNum register={register} />
         </div>

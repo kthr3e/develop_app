@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { LabelText } from "../styles/common";
+import { Text } from "../styles/common";
 import { old_options } from "../util/OldOptions";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 export const OldSelect: FC<Props> = ({ register }) => {
   return (
     <Label>
-      <LabelText>年齢</LabelText>
+      <Text>年齢</Text>
       <SelectContainer>
         <select name="old" ref={register({ required: true })}>
           {old_options.map(({ value, text, hidden }) => (
@@ -26,43 +26,46 @@ export const OldSelect: FC<Props> = ({ register }) => {
 
 const Label = styled.label`
   display: flex;
+  flex-direction: column;
 `;
 
-const SelectContainer = styled.label`
+const SelectContainer = styled.div`
   overflow: hidden;
-  width: 40%;
+  width: 100%;
   text-align: center;
   position: relative;
   border: 1px solid #bbbbbb;
   border-radius: 2px;
-  background: #000;
+  background: #fff;
+  border-radius: 5px;
   &::before {
     position: absolute;
-    top: 0.8em;
-    right: 0.9em;
+    top: 25px;
+    right: 20px;
     width: 0;
     height: 0;
     padding: 0;
     content: "";
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #fff;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #000;
     pointer-events: none;
   }
   &::after {
     position: absolute;
     top: 0;
-    right: 2.5em;
+    right: 60px;
     bottom: 0;
     width: 1px;
     content: "";
-    border-left: 1px solid #fff;
+    border-left: 1px solid #000;
   }
   select {
     width: 100%;
     height: 60px;
     padding: 8px 38px 8px 8px;
-    color: #fff;
+    font-size: 16px;
+    color: #000;
     padding-right: 1em;
     cursor: pointer;
     text-indent: 0.01px;

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { LabelText } from "../styles/common";
+import { Text } from "../styles/common";
 
 type Props = {
   register: any;
@@ -9,7 +9,7 @@ type Props = {
 export const InputNum: FC<Props> = ({ register }) => {
   return (
     <label>
-      <LabelText>上限</LabelText>
+      <Text>上限</Text>
       <InputBox>
         <input type="number" name="up_value" ref={register} min={1} max={30} />
       </InputBox>
@@ -17,11 +17,8 @@ export const InputNum: FC<Props> = ({ register }) => {
   );
 };
 
-
-
 const InputBox = styled.div`
-  width: 150px;
-  margin: auto;
+  width: 100%;
   height: 60px;
   position: relative;
   pointer-events: none;
@@ -30,8 +27,8 @@ const InputBox = styled.div`
     position: absolute;
     top: 8px;
     right: 20px;
-    color: #eceff1;
-    font-size: 20px;
+    color: #000;
+    font-size: 18px;
     content: "▲";
     pointer-events: none; // 当たり判定をなくす
   }
@@ -40,8 +37,8 @@ const InputBox = styled.div`
     position: absolute;
     bottom: 8px;
     right: 20px;
-    color: #eceff1;
-    font-size: 20px;
+    color: #000;
+    font-size: 18px;
     content: "▼";
     pointer-events: none; // 当たり判定をなくす
   }
@@ -50,16 +47,15 @@ const InputBox = styled.div`
     box-sizing: border-box;
     display: block;
     margin: 0 auto 40px;
-    border: none;
-    border-radius: 10px;
+    border: 1px solid #bbbbbb;
     padding: 20px 60px 20px 20px;
     width: 100%;
     height: 60px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5) inset;
     -webkit-appearance: none;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     font-size: 20px;
+    border-radius: 5px;
 
     &:focus {
       outline: none;

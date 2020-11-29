@@ -6,10 +6,19 @@ import { dennys_menu } from "../util/DennysMenu";
 import { COLOR } from "../styles/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { useResetRecoilState } from "recoil";
+import { menu_value } from "../recoil";
 
 export const Menu = () => {
   const [active, set_active] = useState(0);
   const [page, set_page] = useState(1);
+  const reset_menu = useResetRecoilState(menu_value);
+
+  useEffect(() => {
+    return () => {
+      reset_menu();
+    };
+  }, []);
 
   useEffect(() => {
     set_page(1);
@@ -60,7 +69,7 @@ export const Menu = () => {
           <FontAwesomeIcon icon={faAngleRight} />
         </IconButton>
       </Container>
-      <p>{`${page}/${shop_list[active].menu.length}`}</p>
+      <PageNum>{`${page}/${shop_list[active].menu.length}`}</PageNum>
     </>
   );
 };
@@ -68,7 +77,6 @@ export const Menu = () => {
 const Tabs = styled.div`
   overflow: hidden;
   background: #fff;
-  height: 3em;
 `;
 
 const Tab = styled.button<{ active: boolean }>`
@@ -78,17 +86,18 @@ const Tab = styled.button<{ active: boolean }>`
   width: 50%;
   position: relative;
   font-size: 1em;
+  border-radius: 5px;
   ${({ active }) =>
     active
       ? `
     border: 1px solid #ccc;
     border-bottom: none;
     background-color: white;
-    height: 30px;
+    height: 50px;
   `
       : `
-    height: 26px;
-    top: 4px;
+    height: 45px;
+    top: 5px;
   `}
   transition: background-color 0.5s ease-in-out;
 
@@ -126,4 +135,9 @@ const IconButton = styled.button<{ disabled: boolean }>`
 
 const Container = styled.div`
   position: relative;
+`;
+
+const PageNum = styled.div`
+  margin-top: 20px;
+  margin-bottom: 50px;
 `;

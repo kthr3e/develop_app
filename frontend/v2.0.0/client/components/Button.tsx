@@ -15,17 +15,17 @@ export const Button: FC<Props> = ({ children, type }) => {
 };
 
 const StyledButton = styled.button`
-  grid-area: button;
   text-decoration: none;
   overflow: hidden;
   padding: 1.5rem 6rem;
-  border-radius: 0;
   background: #fff;
   font-size: 1.6rem;
   font-weight: 700;
   line-height: 1.5;
   position: relative;
   display: inline-block;
+  border-radius: 5px;
+  border: #000 solid 1px;
   cursor: pointer;
   &:hover {
     color: #fff;
@@ -37,8 +37,8 @@ const StyledButton = styled.button`
     width: 100%;
     height: 100%;
     content: "";
-    -webkit-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     -webkit-transform: translateX(-96%);
     transform: translateX(-96%);
     background: #000;

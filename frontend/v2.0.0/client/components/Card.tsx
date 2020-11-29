@@ -1,18 +1,22 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { menu_value } from "../recoil";
+import { menu_value, shop_state } from "../recoil";
 import Image from "next/image";
+import { sp, tab } from "../styles/media";
 
 type Props = {
   name: string;
+  value?: string;
+  is_shop?: boolean;
 };
 
-export const Card: FC<Props> = ({ name }) => {
+export const Card: FC<Props> = ({ name, is_shop, value }) => {
   const [menu, set_menu] = useRecoilState(menu_value);
-  const include = menu.includes(name);
+  const [shop, set_shop] = useRecoilState(shop_state);
+  const include = is_shop ? shop.includes(value!) : menu.includes(name);
 
-  const handle_click = () => {
+  const handle_click_menu = () => {
     if (include) {
       set_menu((prev) => prev.filter((el) => el !== name));
       return;
@@ -20,13 +24,32 @@ export const Card: FC<Props> = ({ name }) => {
     set_menu((prev) => [...prev, name]);
   };
 
+  const handle_click_shop = () => {
+    if (include) {
+      set_shop((prev) => prev.filter((el) => el !== value!));
+      return;
+    }
+    set_shop((prev) => [...prev, value!]);
+  };
+
   return (
     <Label include={include}>
       <ImgFrame>
-        <Image src="/images/burger.png" height="auto" width="auto" />
+        <Image
+          src={`/images/${value ? value : "burger"}.png`}
+          height="auto"
+          width="auto"
+          layout="intrinsic"
+          objectFit="contain"
+        />
       </ImgFrame>
       <TitleBox>{name}</TitleBox>
-      <input type="checkbox" onClick={handle_click} checked={include} hidden />
+      <input
+        type="checkbox"
+        onClick={is_shop ? handle_click_shop : handle_click_menu}
+        checked={include}
+        hidden
+      />
     </Label>
   );
 };
@@ -34,22 +57,32 @@ export const Card: FC<Props> = ({ name }) => {
 const Label = styled.label<{ include: boolean }>`
   width: 30%;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-  margin: 10px 0;
+  margin: 10px;
   cursor: pointer;
+  border-radius: 5px;
   ${({ include }) =>
     include && `background-color: black; opacity: 0.5; color: white;`};
+  ${tab`
+    width: 25%;
+    height: 200px;
+  `}
+  ${sp`
+    width: 40%;
+    margin: 5px;
+  `}
 `;
 
 const ImgFrame = styled.div`
   width: 100%;
-  height: auto;
   box-sizing: border-box;
   padding-top: 20px;
+  ${sp`
+    padding-top: 0;
+  `}
 `;
 
 const TitleBox = styled.div`
   width: 100%;
-  height: auto;
   padding: 20px 18px;
   box-sizing: border-box;
 `;

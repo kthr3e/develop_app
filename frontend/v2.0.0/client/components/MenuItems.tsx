@@ -1,8 +1,5 @@
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { FC } from "react";
 import styled from "styled-components";
-import { COLOR } from "../styles/colors";
 import { Card } from "./Card";
 
 type Props = {
@@ -23,6 +20,6 @@ export const MenuItem: FC<Props> = ({ menu, active }) => {
 const Page = styled.div<{ active: boolean }>`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   ${({ active }) => !active && `display: none;`};
 `;

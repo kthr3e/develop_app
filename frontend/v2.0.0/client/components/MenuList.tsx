@@ -9,16 +9,10 @@ type Props = {
 
 export const MenuList: FC<Props> = ({ menu, page }) => {
   return (
-    <List>
+    <div>
       {menu.map((menu, i) => (
         <MenuItem key={i} menu={menu} active={page === i + 1} />
       ))}
-    </List>
+    </div>
   );
 };
-
-const List = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  height: auto;
-`;

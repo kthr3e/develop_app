@@ -5,21 +5,23 @@ import { SelectedMenu } from "../components/SelectedMenu";
 import { MethodRadio } from "../components/MethodRadio";
 import { faPersonBooth } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { LabelText } from "../styles/common";
+import { Text } from "../styles/common";
+import { Shop } from "../components/Shop";
 
 export default function Home() {
   const [method, set_method] = useState<"menu" | "shop">("menu");
 
   return (
     <Container>
-      <LabelText>1日に必要な栄養を取るためのメニューを診断！</LabelText>
-      <LabelText>
+      <Text>1日に必要な栄養を取るためのメニューを診断！</Text>
+      <Text>
         あなたに必要な1日の栄養のうち、選んだメニューがどれだけ補えるか（充足率）をチェックすることができます。
-      </LabelText>
+      </Text>
       <div
         css={`
           display: flex;
           justify-content: center;
+          margin: 50px 0;
         `}>
         <MethodRadio
           icon={faPersonBooth}
@@ -34,9 +36,13 @@ export default function Home() {
           handle_click={() => set_method("shop")}
         />
       </div>
-      <Menu />
-      <p>選択したメニュー</p>
-      <SelectedMenu />
+      {method === "menu" ? <Menu /> : <Shop />}
+      {method === "menu" && (
+        <>
+          <Text>選択したメニュー</Text>
+          <SelectedMenu />
+        </>
+      )}
       <UserDataForm method={method} />
     </Container>
   );

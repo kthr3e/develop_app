@@ -15,7 +15,7 @@ export const SelectedMenu = () => {
       {menu.map((name) => (
         <Label onClick={() => handle_click(name)} key={name}>
           <ImgFrame>
-            <Image src="/images/burger.png" height="auto" width="auto" />
+            <Image src="/images/burger.png" height="50px" width="auto" />
           </ImgFrame>
           <TitleBox>{name}</TitleBox>
         </Label>
@@ -24,11 +24,14 @@ export const SelectedMenu = () => {
   );
 };
 
-const Label = styled.label`
-  width: 30%;
+const Label = styled.div`
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-  margin: 10px 0;
+  margin: 10px;
   cursor: pointer;
+  height: 130px;
+  min-width: 130px;
+  width: 130px;
+  border-radius: 5px;
 `;
 
 const ImgFrame = styled.div`
@@ -41,17 +44,18 @@ const ImgFrame = styled.div`
 const TitleBox = styled.div`
   width: 100%;
   height: auto;
-  padding: 20px 18px;
+  padding: 15px;
   box-sizing: border-box;
+  font-size: 12px;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  height: 300px;
+  height: 200px;
   overflow-x: auto;
-  background: rgba(0, 0, 0, 0.05);
+  overflow-y: hidden;
   margin-bottom: 50px;
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  padding: 20px;
 `;

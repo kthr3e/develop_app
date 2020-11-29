@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { Text } from "../styles/common";
 
 type Props = {
   register: any;
@@ -12,13 +13,13 @@ export const GenderRadio: FC<Props> = ({ register }) => {
         <ListItem>
           <label>
             <OptionInput type="radio" name="gender" ref={register} value="0" />
-            男性
+            <Text>男性</Text>
           </label>
         </ListItem>
         <li className="list_item">
           <label>
             <OptionInput type="radio" name="gender" ref={register} value="1" />
-            女性
+            <Text>女性</Text>
           </label>
         </li>
       </ul>
@@ -27,19 +28,21 @@ export const GenderRadio: FC<Props> = ({ register }) => {
 };
 
 const RadioContainer = styled.div`
-  width: 50%;
   text-align: left;
   > ul {
-    margin: 0.5rem 0.5rem 2rem 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     list-style: none;
     border: 1px solid #cccccc;
+    border-radius: 5px;
+    height: 160px;
   }
-  > label {
+  label {
     line-height: 135%;
     position: relative;
     margin: 0.5rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -72,12 +75,12 @@ const OptionInput = styled.input`
     left: -0.25rem;
     width: 1.25rem;
     height: 1.25rem;
-    background: #da3c41;
+    background: black;
   }
   :checked:before {
     -webkit-transform: scale(0, 0);
     transform: scale(0, 0);
     border-width: 0.625rem;
-    border-color: #da3c41;
+    border-color: black;
   }
 `;
