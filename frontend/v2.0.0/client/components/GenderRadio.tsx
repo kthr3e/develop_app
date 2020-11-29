@@ -12,7 +12,13 @@ export const GenderRadio: FC<Props> = ({ register }) => {
       <ul>
         <ListItem>
           <label>
-            <OptionInput type="radio" name="gender" ref={register} value="0" />
+            <OptionInput
+              type="radio"
+              name="gender"
+              ref={register}
+              value="0"
+              defaultChecked={true}
+            />
             <Text>男性</Text>
           </label>
         </ListItem>
@@ -34,7 +40,7 @@ const RadioContainer = styled.div`
     list-style: none;
     border: 1px solid #cccccc;
     border-radius: 5px;
-    height: 160px;
+    height: 140px;
   }
   label {
     line-height: 135%;

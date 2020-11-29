@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { menu_value, ResultType, result_value, shop_state } from "../recoil";
-import { Text, Row } from "../styles/common";
+import { Text, Row, Desc } from "../styles/common";
 import { sp } from "../styles/media";
 import { Button } from "./Button";
 import { GenderRadio } from "./GenderRadio";
@@ -56,35 +56,49 @@ export const UserDataForm: FC<Props> = ({ method }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(on_submit)}>
-      <div
-        css={`
-          display: flex;
-          margin-bottom: 100px;
-          ${sp`
-            flex-direction: column;
-          `}
-        `}>
-        <div
-          css={`
-            flex: 1;
-            margin: 0 20px;
-          `}>
+    <form
+      onSubmit={handleSubmit(on_submit)}
+      css={`
+        margin-bottom: 20px;
+      `}>
+      {(errors.gender ||
+        errors.menu ||
+        errors.old ||
+        errors.shop ||
+        errors.up_value) && <Error>※ 全ての項目を入力してください。</Error>}
+      <Box>
+        <InputContainer>
           <Text>性別</Text>
           <GenderRadio register={register} />
-        </div>
-        <div
-          css={`
-            flex: 1;
-            margin: 0 20px;
-          `}>
+        </InputContainer>
+        <InputContainer>
           <OldSelect register={register} />
           <InputNum register={register} />
-        </div>
-      </div>
+        </InputContainer>
+      </Box>
+      <Desc>※ 入力内容によって結果が変化します。</Desc>
+      <Desc>※ "上限"は1つのメニューの最大数を示します。</Desc>
       <Button type="submit">診断する</Button>
-    </Form>
+    </form>
   );
 };
 
-const Form = styled.form``;
+const Error = styled.p`
+  color: red;
+  text-align: left;
+`;
+
+const InputContainer = styled.div`
+  flex: 1;
+  margin: 0 20px;
+  ${sp`
+    margin: 0;
+  `};
+`;
+
+const Box = styled.div`
+  display: flex;
+  ${sp`
+    flex-direction: column;
+  `};
+`;

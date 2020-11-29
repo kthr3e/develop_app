@@ -11,7 +11,14 @@ export const InputNum: FC<Props> = ({ register }) => {
     <label>
       <Text>上限</Text>
       <InputBox>
-        <input type="number" name="up_value" ref={register} min={1} max={30} />
+        <input
+          type="number"
+          name="up_value"
+          defaultValue={5}
+          ref={register({ required: true })}
+          min={1}
+          max={30}
+        />
       </InputBox>
     </label>
   );
@@ -19,7 +26,7 @@ export const InputNum: FC<Props> = ({ register }) => {
 
 const InputBox = styled.div`
   width: 100%;
-  height: 60px;
+  height: 50px;
   position: relative;
   pointer-events: none;
 
@@ -50,7 +57,7 @@ const InputBox = styled.div`
     border: 1px solid #bbbbbb;
     padding: 20px 60px 20px 20px;
     width: 100%;
-    height: 60px;
+    height: 50px;
     -webkit-appearance: none;
     background-color: white;
     color: black;

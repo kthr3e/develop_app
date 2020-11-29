@@ -1,6 +1,7 @@
 import { relative } from "path";
 import React, { FC } from "react";
 import styled from "styled-components";
+import { sp } from "../styles/media";
 
 type Props = {
   type?: "button" | "submit";
@@ -26,7 +27,13 @@ const StyledButton = styled.button`
   display: inline-block;
   border-radius: 5px;
   border: #000 solid 1px;
+  width: 100%;
+  margin-top: 50px;
   cursor: pointer;
+  ${sp`
+    font-size: 15px;
+    margin-top: 20px;
+  `}
   &:hover {
     color: #fff;
   }

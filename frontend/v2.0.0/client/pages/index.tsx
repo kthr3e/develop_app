@@ -3,10 +3,11 @@ import { UserDataForm } from "../components/UserDataForm";
 import { Menu } from "../components/Menu";
 import { SelectedMenu } from "../components/SelectedMenu";
 import { MethodRadio } from "../components/MethodRadio";
-import { faPersonBooth } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { Text } from "../styles/common";
+import { Desc, Text } from "../styles/common";
 import { Shop } from "../components/Shop";
+import { sp } from "../styles/media";
 
 export default function Home() {
   const [method, set_method] = useState<"menu" | "shop">("menu");
@@ -17,6 +18,9 @@ export default function Home() {
       <Text>
         あなたに必要な1日の栄養のうち、選んだメニューがどれだけ補えるか（充足率）をチェックすることができます。
       </Text>
+      <br />
+      <Text>1.メニューまたは店の種類を選択してください。</Text>
+      <Desc>※ 店を選択した場合は店の全メニューから計算されます。</Desc>
       <div
         css={`
           display: flex;
@@ -24,14 +28,14 @@ export default function Home() {
           margin: 50px 0;
         `}>
         <MethodRadio
-          icon={faPersonBooth}
-          label="メニューから選択"
+          icon={faBookOpen}
+          label="メニュー"
           checked={method === "menu"}
           handle_click={() => set_method("menu")}
         />
         <MethodRadio
-          icon={faPersonBooth}
-          label="店から選択"
+          icon={faStore}
+          label="店"
           checked={method === "shop"}
           handle_click={() => set_method("shop")}
         />
@@ -43,6 +47,7 @@ export default function Home() {
           <SelectedMenu />
         </>
       )}
+      <Text>2.基本情報を入力</Text>
       <UserDataForm method={method} />
     </Container>
   );

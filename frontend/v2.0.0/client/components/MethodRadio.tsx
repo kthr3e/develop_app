@@ -2,6 +2,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React, { FC } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { sp } from "../styles/media";
 
 type Props = {
   icon: IconDefinition;
@@ -71,5 +72,8 @@ const RadioLabel = styled.p<{ checked: boolean }>`
   letter-spacing: 1px;
   color: black;
   margin-left: 10px;
-  ${({ checked }) => checked && `color: white;`}
+  ${sp`
+    font-size: 11px;
+  `};
+  ${({ checked }) => checked && `color: white;`};
 `;

@@ -1,12 +1,14 @@
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/dist/client/router";
 import React from "react";
 import styled from "styled-components";
 
 export const Header = () => {
+  const router = useRouter();
   return (
     <>
-      <HeaderContainer>
+      <HeaderContainer onClick={() => router.push("/")}>
         <FontAwesomeIcon icon={faGraduationCap} />
         <h3>栄養診断App v2.0.0</h3>
       </HeaderContainer>

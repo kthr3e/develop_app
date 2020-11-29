@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { menu_value } from "../recoil";
 import Image from "next/image";
+import { sp } from "../styles/media";
 
 export const SelectedMenu = () => {
   const [menu, set_menu] = useRecoilState(menu_value);
@@ -15,7 +16,13 @@ export const SelectedMenu = () => {
       {menu.map((name) => (
         <Label onClick={() => handle_click(name)} key={name}>
           <ImgFrame>
-            <Image src="/images/burger.png" height="50px" width="auto" />
+            <Image
+              src="/images/burger.png"
+              height="50px"
+              width="auto"
+              layout="intrinsic"
+              objectFit="contain"
+            />
           </ImgFrame>
           <TitleBox>{name}</TitleBox>
         </Label>
@@ -32,6 +39,11 @@ const Label = styled.div`
   min-width: 130px;
   width: 130px;
   border-radius: 5px;
+  ${sp`
+    height: 90px;
+    width: 100px;
+    min-width: 100px;
+  `}
 `;
 
 const ImgFrame = styled.div`
@@ -39,6 +51,13 @@ const ImgFrame = styled.div`
   height: auto;
   box-sizing: border-box;
   padding-top: 20px;
+  ${sp`
+    div {
+      height: 30px;
+      width: 100px;
+    }
+    padding-top: 10px;
+  `}
 `;
 
 const TitleBox = styled.div`
@@ -47,6 +66,10 @@ const TitleBox = styled.div`
   padding: 15px;
   box-sizing: border-box;
   font-size: 12px;
+  ${sp`
+    padding: 10px;
+    font-size: 8px;
+  `}
 `;
 
 const Container = styled.div`
@@ -58,4 +81,10 @@ const Container = styled.div`
   border: 1px solid #bbbbbb;
   border-radius: 5px;
   padding: 20px;
+  ${sp`
+    height: 230px;
+    padding: 0 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
+  `}
 `;

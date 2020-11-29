@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useResetRecoilState } from "recoil";
 import { menu_value } from "../recoil";
+import { sp } from "../styles/media";
 
 export const Menu = () => {
   const [active, set_active] = useState(0);
@@ -50,6 +51,9 @@ export const Menu = () => {
         <IconButton
           css={`
             left: 0;
+            ${sp`
+              left: -25px;
+            `}
           `}
           disabled={page === 1}
           onClick={() => set_page((prev) => prev - 1)}>
@@ -63,6 +67,9 @@ export const Menu = () => {
         <IconButton
           css={`
             right: 0;
+            ${sp`
+              right: -25px;
+            `}
           `}
           disabled={page === shop_list[active].menu.length}
           onClick={() => set_page((prev) => prev + 1)}>

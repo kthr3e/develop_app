@@ -40,8 +40,8 @@ const SelectContainer = styled.div`
   border-radius: 5px;
   &::before {
     position: absolute;
-    top: 25px;
-    right: 20px;
+    top: 20px;
+    right: 16px;
     width: 0;
     height: 0;
     padding: 0;
@@ -54,7 +54,7 @@ const SelectContainer = styled.div`
   &::after {
     position: absolute;
     top: 0;
-    right: 60px;
+    right: 50px;
     bottom: 0;
     width: 1px;
     content: "";
@@ -62,7 +62,7 @@ const SelectContainer = styled.div`
   }
   select {
     width: 100%;
-    height: 60px;
+    height: 50px;
     padding: 8px 38px 8px 8px;
     font-size: 16px;
     color: #000;

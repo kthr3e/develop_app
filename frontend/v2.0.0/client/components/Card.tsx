@@ -60,8 +60,9 @@ const Label = styled.label<{ include: boolean }>`
   margin: 10px;
   cursor: pointer;
   border-radius: 5px;
+  overflow: hidden;
   ${({ include }) =>
-    include && `background-color: black; opacity: 0.5; color: white;`};
+    include && `box-shadow: none; opacity: 0.3;`};
   ${tab`
     width: 25%;
     height: 200px;
@@ -78,6 +79,9 @@ const ImgFrame = styled.div`
   padding-top: 20px;
   ${sp`
     padding-top: 0;
+    div {
+      height: 80px;
+    }
   `}
 `;
 
@@ -85,4 +89,9 @@ const TitleBox = styled.div`
   width: 100%;
   padding: 20px 18px;
   box-sizing: border-box;
+  ${sp`
+    font-size: 12px;
+    padding: 10px;
+    padding-top: 0;
+  `}
 `;
