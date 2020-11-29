@@ -12,6 +12,10 @@ export const Shop = () => {
       name: "デニーズ",
       value: "dennys",
     },
+    {
+      name: "モスバーガー",
+      value: "mos",
+    }
   ];
 
   return (

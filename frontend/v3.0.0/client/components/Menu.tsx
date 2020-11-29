@@ -9,6 +9,7 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useResetRecoilState } from "recoil";
 import { menu_value } from "../recoil";
 import { sp } from "../styles/media";
+import { mos_menu } from "../util/MosMenu";
 
 export const Menu = () => {
   const [active, set_active] = useState(0);
@@ -35,6 +36,11 @@ export const Menu = () => {
       id: 1,
       name: "デニーズ",
       menu: dennys_menu,
+    },
+    {
+      id: 2,
+      name: "モスバーガー",
+      menu: mos_menu,
     },
   ];
 
@@ -90,7 +96,7 @@ const Tab = styled.button<{ active: boolean }>`
   border: none;
   outline: none;
   cursor: pointer;
-  width: 50%;
+  width: 33%;
   position: relative;
   font-size: 1em;
   border-radius: 5px;
