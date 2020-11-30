@@ -1,4 +1,3 @@
-import { faPersonBooth } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 import { useRouter } from "next/dist/client/router";
 import React, { FC } from "react";
@@ -7,12 +6,11 @@ import { useRecoilValue } from "recoil";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { menu_value, ResultType, result_value, shop_state } from "../recoil";
-import { Text, Row, Desc } from "../styles/common";
+import { Text, Desc } from "../styles/common";
 import { sp } from "../styles/media";
 import { Button } from "./Button";
 import { GenderRadio } from "./GenderRadio";
 import { InputNum } from "./InputNum";
-import { MethodRadio } from "./MethodRadio";
 import { OldSelect } from "./OldSelect";
 
 export type FormData = {
@@ -40,8 +38,13 @@ export const UserDataForm: FC<Props> = ({ method }) => {
   const on_submit = async (data: FormData) => {
     console.log(data);
     try {
-      data["shop"] = method === "shop" ? shop : ["macdonalds", "dennys"];
       data["menu"] = menu;
+      data["shop"] =
+        method === "shop"
+          ? shop
+          : menu.length > 0
+          ? ["macdonalds", "dennys"]
+          : [];
       const res = await Axios.post("http://localhost:5000/api/check", {
         data,
       });
@@ -55,11 +58,7 @@ export const UserDataForm: FC<Props> = ({ method }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(on_submit)}
-      css={`
-        margin-bottom: 20px;
-      `}>
+    <Form onSubmit={handleSubmit(on_submit)}>
       {(errors.gender ||
         errors.menu ||
         errors.old ||
@@ -78,9 +77,13 @@ export const UserDataForm: FC<Props> = ({ method }) => {
       <Desc>※ 入力内容によって結果が変化します。</Desc>
       <Desc>※ "上限"は1つのメニューの最大数を示します。</Desc>
       <Button type="submit">診断する</Button>
-    </form>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  margin-bottom: 20px;
+`;
 
 const Error = styled.p`
   color: red;

@@ -27,17 +27,17 @@ export default function Result() {
         `}>
         診断結果
       </Text>
-      {result === "error" ? (
-        <h1>そんな都合のいいメニューはありません！</h1>
-      ) : (
+      {result.length === 2 ? (
         <Container>
           <Chart result={result[1] as { [name: string]: string }} />
           <Table result={result[0] as { [name: string]: string }} />
         </Container>
+      ) : (
+        <h1>そんな都合のいいメニューはありません！</h1>
       )}
-      <div css="width: 300px; margin: 0 auto;">
+      <ButtonContainer>
         <Button handle_click={() => location.replace("/")}>TOPへ戻る</Button>
-      </div>
+      </ButtonContainer>
     </>
   );
 }
@@ -49,4 +49,9 @@ const Container = styled.div`
   ${sp`
     flex-direction: column;
   `}
+`;
+
+const ButtonContainer = styled.div`
+  width: 300px;
+  margin: 0 auto;
 `;

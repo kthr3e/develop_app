@@ -7,7 +7,6 @@ import { faBookOpen, faStore } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Desc, Text } from "../styles/common";
 import { Shop } from "../components/Shop";
-import { sp } from "../styles/media";
 
 export default function Home() {
   const [method, set_method] = useState<"menu" | "shop">("menu");
@@ -21,12 +20,7 @@ export default function Home() {
       <br />
       <Text>1.メニューまたは店の種類を選択してください。</Text>
       <Desc>※ 店を選択した場合は店の全メニューから計算されます。</Desc>
-      <div
-        css={`
-          display: flex;
-          justify-content: center;
-          margin: 50px 0;
-        `}>
+      <RadioGroup>
         <MethodRadio
           icon={faBookOpen}
           label="メニューから選択"
@@ -39,7 +33,7 @@ export default function Home() {
           checked={method === "shop"}
           handle_click={() => set_method("shop")}
         />
-      </div>
+      </RadioGroup>
       {method === "menu" ? <Menu /> : <Shop />}
       {method === "menu" && <SelectedMenu />}
       <Text>2.基本情報を入力</Text>
@@ -53,4 +47,10 @@ const Container = styled.div`
   width: 80%;
   max-width: 900px;
   margin: 0 auto;
+`;
+
+const RadioGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
 `;
