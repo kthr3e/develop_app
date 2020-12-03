@@ -35,9 +35,9 @@ export default function Result() {
           <Table result={result[0] as { [name: string]: string }} />
         </Container>
       )}
-      <div css="width: 300px; margin: 0 auto;">
+      <ButtonContainer>
         <Button handle_click={() => location.replace("/")}>TOPへ戻る</Button>
-      </div>
+      </ButtonContainer>
     </>
   );
 }
@@ -49,4 +49,9 @@ const Container = styled.div`
   ${sp`
     flex-direction: column;
   `}
+`;
+
+const ButtonContainer = styled.div`
+  width: 300px;
+  margin: 0 auto;
 `;

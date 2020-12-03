@@ -17,14 +17,10 @@ export const SelectedMenu = () => {
 
   return (
     <>
-      <div
-        css={`
-          display: flex;
-          justify-content: left;
-        `}>
+      <ContainerHeader>
         <Text>選択したメニュー</Text>
         <ResetButton onClick={() => reset()}>RESET</ResetButton>
-      </div>
+      </ContainerHeader>
       <Container>
         {menu.map((name) => (
           <Label key={name}>
@@ -50,6 +46,11 @@ export const SelectedMenu = () => {
     </>
   );
 };
+
+const ContainerHeader = styled.div`
+  display: flex;
+  justify-content: left;
+`;
 
 const Label = styled.div`
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
