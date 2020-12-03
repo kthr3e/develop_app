@@ -13,13 +13,13 @@ def index():
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-    data = {"shop":["mos"]}
+    data = {"shop":["macdonalds"]}
     MenuDict = menu_dict(data["shop"])
     #print("wx: ",MenuDict)
 
     # メニューリストを自動で取得するようにする。のちに選択式になる予定。
 
-    data = {"menu":[]}
+    data = {"menu":["ハンバーガー"]}
 
     if not data["menu"]:
         target_menu_list = list(MenuDict.keys())
@@ -59,6 +59,10 @@ def index():
         print("結果が求められていないか、ERRORか")
         # メニューリストを選択されたものを除外と選択されたものの栄養素を抜いた値を使用する。
         recommend_menu_list,one_da_nutrition_dict = recommend(MenuDict,target_menu_list,one_da_nutrition_dict,eiyou_data)
+        #　全メニューが選択されたにもかかわらず、一日の栄養素を満たさない場合。
+        if not recommend_menu_list:
+            print("残念ながら選択されたお店では一日の栄養素を満たすものはないようです")
+            exit()
         eiyou_data,xs,status = find(problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
         #　変数名ごとに表示
         print("追加でこんなメニューはどうですか")
