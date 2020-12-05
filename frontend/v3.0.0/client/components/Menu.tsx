@@ -118,6 +118,9 @@ const Tab = styled.button<{ active: boolean }>`
   :hover {
     background-color: ${COLOR.WHITE};
   }
+  ${sp`
+    font-size: .7rem;
+  `}
 `;
 
 const Content = styled.div<{ active: boolean }>`

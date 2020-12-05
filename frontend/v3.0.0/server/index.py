@@ -101,8 +101,9 @@ def index():
                     if int(x.value()) != 0:
                         #print("x.value:",x.value)
                         print(str(x),":",str(int(x.value())),"個")
-                        rec_menu[str(x)] = str(x)+":"+str(int(x.value()))+"個"
-                return make_response(jsonify(rec_menu))
+                        rec_menu[str(x)] = str(int(x.value()))+"個"
+                response=[rec_menu]
+                return make_response(jsonify(response))
 
             else:
                 print("もう一度メニューを考え直してみよう")
