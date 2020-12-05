@@ -11,21 +11,25 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
     eiyou_data = {}
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
-        eiyou_data[key] = get_nutrition_val_list(MenuDict,target_menu_list,key)
+        eiyou = get_nutrition_val_list(MenuDict,target_menu_list,key)
+        if not eiyou:
+            continue
+        eiyou_data[key] = eiyou
     #print("eiyou_data",eiyou_data)
+    #print("eiyou_data",eiyou_data['エネルギー[kcal]'])
 
     # 変数の定義
     #LpVariableで自由変数を作成。値は-∞から∞まで
     #lowBoundで0から∞まで
     #catで変数の種類指定
     # 上限を指定
-    upbound = 5
+    upbound = 10
     xs = up_limit(target_menu_list,upbound)
     #print("xs:",xs)
 
     # 目的関数：カロリーを最小化
     # lpdot:二つのリストのない席を求める。
-    problem += pulp.lpDot(eiyou_data["エネルギー[kcal]"],xs)
+    problem += pulp.lpDot(eiyou_data['エネルギー[kcal]'],xs)
 
     #制約条件：　一日に必要内容量をそれぞれ満たすこと
     # 条件カスタマイズ＆ON-OFFしやすいように、あえてループ外で起債。
@@ -51,4 +55,5 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
         problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= float(one_da_nutrition_dict["食塩相当量[g]"])
 
     status = problem.solve()
+    #print(eiyou_data)
     return eiyou_data,xs,status,cal_key

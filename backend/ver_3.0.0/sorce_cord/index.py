@@ -13,13 +13,13 @@ def index():
     # 今回はカロリーを最小化したい。
     problem = pulp.LpProblem(name ="1日の栄養素を満たすメニュー", sense = pulp.LpMinimize)
 
-    data = {"shop":["mos"]}
+    data = {"shop":["macdonalds"]}
     MenuDict = menu_dict(data["shop"])
     #print("wx: ",MenuDict)
 
     # メニューリストを自動で取得するようにする。のちに選択式になる予定。
 
-    data = {"menu":[]}
+    data = {"menu":["カフェラテ"]}
 
     if not data["menu"]:
         target_menu_list = list(MenuDict.keys())
@@ -58,18 +58,26 @@ def index():
     else:
         print("結果が求められていないか、ERRORか")
         # メニューリストを選択されたものを除外と選択されたものの栄養素を抜いた値を使用する。
+        rec_problem = pulp.LpProblem(name ="1日の栄養素を満たす追加のメニュー", sense = pulp.LpMinimize)
         recommend_menu_list,one_da_nutrition_dict = recommend(MenuDict,target_menu_list,one_da_nutrition_dict,eiyou_data)
-        eiyou_data,xs,status = find(problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
+        #　全メニューが選択されたにもかかわらず、一日の栄養素を満たさない場合。
+        if not recommend_menu_list:
+            print("残念ながら選択されたお店では一日の栄養素を満たすものはないようです")
+            exit()
+        eiyou_data,xs,re_status,cal_key = find(rec_problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
         #　変数名ごとに表示
-        print("追加でこんなメニューはどうですか")
-        for x in xs:
-            #print(x,x.value())
-            if x.value() != None and int(x.value()) != 0:
-                #print("x.value:",x.value)
-                print(str(x),":",str(int(x.value())),"個")
+        if pulp.LpStatus[re_status] == "Optimal":
+            print("追加でこんなメニューはどうですか")
+            for x in xs:
+                #print(x,x.value())
+                if x.value() != None and int(x.value()) != 0:
+                    #print("x.value:",x.value)
+                    print(str(x),":",str(int(x.value())),"個")
 
-        print("\n")
-        # それぞれの栄養素がいくらか
+            print("\n")
+
+        else:
+            print("！！！！残念ながら選択されたお店では一日の栄養素を満たすものはないようです")
 
 
 # python main.pyで実行されたときだけ動くようにする。
