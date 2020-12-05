@@ -11,6 +11,7 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
     eiyou_data = {}
     for key in one_da_nutrition_dict.keys():
         # keyに入っている栄養の名称を、データのdictのkeyにする。
+        #print(key)
         eiyou = get_nutrition_val_list(MenuDict,target_menu_list,key)
         if not eiyou:
             continue
