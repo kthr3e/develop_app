@@ -30,5 +30,5 @@ export const Shop = () => {
 const ShopContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
 `;

@@ -1,8 +1,10 @@
 import { atom } from "recoil";
 
-export type ResultType = {
-  [name: string]: string;
-}[];
+export type ResultType =
+  | {
+      [name: string]: string;
+    }[]
+  | string;
 
 export const result_value = atom<ResultType>({
   key: "result_value",
