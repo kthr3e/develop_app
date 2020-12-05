@@ -92,7 +92,7 @@ def index():
             if not recommend_menu_list:
                 print("残念ながら選択されたお店では一日の栄養素を満たすものはないようです")
                 exit()
-            eiyou_data,xs,status = find(rec_problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
+            eiyou_data,xs,re_status,cal_key = find(rec_problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
             #　変数名ごとに表示
             if pulp.LpStatus[re_status] == "Optimal":
                 rec_menu={}

@@ -23,7 +23,7 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
     #lowBoundで0から∞まで
     #catで変数の種類指定
     # 上限を指定
-    upbound = data["up_value"]
+    upbound = int(data["up_value"])
     xs = up_limit(target_menu_list,upbound)
     # print("xs:",xs)
 
@@ -53,6 +53,8 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
     if len(eiyou_data["食塩相当量[g]"]) == len(target_menu_list):
         cal_key.append("食塩相当量[g]")
         problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= float(one_da_nutrition_dict["食塩相当量[g]"])
-    status=problem.solve()
-    print(eiyou_data)
+    print("osa ga kowasita")
+    #print("kthree ga kowasita")
+    status = problem.solve()
+    #print(eiyou_data)
     return eiyou_data,xs,status,cal_key
