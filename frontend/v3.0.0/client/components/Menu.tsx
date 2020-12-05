@@ -96,7 +96,7 @@ const Tab = styled.button<{ active: boolean }>`
   border: none;
   outline: none;
   cursor: pointer;
-  width: 50%;
+  width: 33%;
   position: relative;
   font-size: 1rem;
   border-radius: 0.5rem;

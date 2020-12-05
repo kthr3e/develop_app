@@ -101,8 +101,6 @@ def index():
                     if int(x.value()) != 0:
                         #print("x.value:",x.value)
                         print(str(x),":",str(int(x.value())),"個")
-
-            print("\n")
             else:
                 print("もう一度メニューを考え直してみよう")
 

@@ -84,6 +84,7 @@ export default function Home() {
       );
       set_result_value(res.data);
       reset();
+      console.log(res)
       router.push("/result");
     } catch (err) {
       console.error(err);

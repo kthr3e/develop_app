@@ -35,9 +35,14 @@ const TableContainer = styled.div`
   overflow-y: auto;
   border-radius: 0.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   table {
     width: 100%;
+    thead,
+    tbody {
+      display: block;
+    }
     th,
     td {
       border: 0.1rem solid rgba(0, 0, 0, 0.1);
@@ -48,6 +53,7 @@ const TableContainer = styled.div`
       background: ${COLOR.BLACK};
       color: ${COLOR.WHITE};
       font-weight: bold;
+      white-space: nowrap;
     }
   }
   ${sp`

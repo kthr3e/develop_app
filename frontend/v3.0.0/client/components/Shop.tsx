@@ -30,5 +30,6 @@ export const Shop = () => {
 const ShopContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 5rem;
 `;
