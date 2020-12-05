@@ -16,7 +16,7 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
             continue
         eiyou_data[key] = eiyou
     #print("eiyou_data",eiyou_data)
-    #print("eiyou_data",eiyou_data['エネルギー[kcal]'])
+    # print("eiyou_data",eiyou_data['エネルギー[kcal]'])
 
     # 変数の定義
     #LpVariableで自由変数を作成。値は-∞から∞まで
@@ -25,7 +25,7 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
     # 上限を指定
     upbound = data["up_value"]
     xs = up_limit(target_menu_list,upbound)
-    #print("xs:",xs)
+    # print("xs:",xs)
 
     # 目的関数：カロリーを最小化
     # lpdot:二つのリストのない席を求める。
@@ -46,14 +46,13 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
             #計算したkeyを保存する。
             #　計算していないのに栄養素に値がなぜか０じゃないものがあるため
             cal_key.append(key)
-            #print("eiyou_data[key]",len(eiyou_data[key]),len(target_menu_list),key)
+            # print("eiyou_data[key]",len(eiyou_data[key]),len(target_menu_list),key)
             problem += pulp.lpDot(eiyou_data[key], xs) >= float(one_da_nutrition_dict[key])
-            #print("栄養素とxsの内積",pulp.lpDot(eiyou_data[key], xs))
+            # print("栄養素とxsの内積",pulp.lpDot(eiyou_data[key], xs))
 
     if len(eiyou_data["食塩相当量[g]"]) == len(target_menu_list):
         cal_key.append("食塩相当量[g]")
         problem += pulp.lpDot(eiyou_data["食塩相当量[g]"], xs) <= float(one_da_nutrition_dict["食塩相当量[g]"])
-
-    status = problem.solve()
-    #print(eiyou_data)
+    status=problem.solve()
+    print(eiyou_data)
     return eiyou_data,xs,status,cal_key

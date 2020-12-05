@@ -63,7 +63,7 @@ def index():
 
 
             # 簡易結果表示
-            #print([x.value() for x in xs])
+            # print([x.value() for x in xs])
             # print(problem.objective.value())
 
             #　変数名ごとに表示
@@ -102,7 +102,7 @@ def index():
                         #print("x.value:",x.value)
                         print(str(x),":",str(int(x.value())),"個")
                         rec_menu[str(x)] = str(x)+":"+str(int(x.value()))+"個"
-            return make_response(jsonify(rec_menu))
+                return make_response(jsonify(rec_menu))
 
             else:
                 print("もう一度メニューを考え直してみよう")

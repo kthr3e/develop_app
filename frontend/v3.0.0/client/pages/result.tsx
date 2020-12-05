@@ -6,6 +6,7 @@ import { Button } from "../components/Button";
 import { Chart } from "../components/Chart";
 import { Table } from "../components/Table";
 import { menu_value, result_value, shop_state } from "../recoil";
+import { sp } from "../styles/media";
 
 export default function Result() {
   const result = useRecoilValue(result_value);
@@ -43,9 +44,11 @@ export default function Result() {
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
+  ${sp`
+    flex-direction: column;
+  `}
 `;
 
 const H1 = styled.h1`

@@ -30,8 +30,8 @@ export const Table: FC<Props> = ({ result }) => {
 };
 
 const TableContainer = styled.div`
-  width: 30rem;
-  height: 30rem;
+  width: 25rem;
+  height: 25rem;
   overflow-y: auto;
   border-radius: 0.5rem;
   display: flex;
