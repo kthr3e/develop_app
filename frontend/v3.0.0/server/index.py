@@ -86,8 +86,7 @@ def index():
             return make_response(jsonify(response))
         # 条件にあった解が見つからなかった時はerrorを返す
         else:
-            response = 'error'
-            return make_response(jsonify(response))
+
             rec_problem = pulp.LpProblem(name ="1日の栄養素を満たす追加のメニュー", sense = pulp.LpMinimize)
             recommend_menu_list,one_da_nutrition_dict = recommend(MenuDict,target_menu_list,one_da_nutrition_dict,eiyou_data)
             if not recommend_menu_list:
@@ -96,13 +95,19 @@ def index():
             eiyou_data,xs,status = find(rec_problem,data,MenuDict,recommend_menu_list,one_da_nutrition_dict)
             #　変数名ごとに表示
             if pulp.LpStatus[re_status] == "Optimal":
+                rec_menu={}
                 print("追加でこんなメニューはどうですか")
                 for x in xs:
                     if int(x.value()) != 0:
                         #print("x.value:",x.value)
                         print(str(x),":",str(int(x.value())),"個")
+                        rec_menu[str(x)] = str(x)+":"+str(int(x.value()))+"個"
+            return make_response(jsonify(rec_menu))
+
             else:
                 print("もう一度メニューを考え直してみよう")
+                response = 'error'
+                return make_response(jsonify(response))
 
     except:
         return"""

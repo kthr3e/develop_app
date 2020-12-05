@@ -23,7 +23,7 @@ def find(problem,data,MenuDict,target_menu_list,one_da_nutrition_dict):
     #lowBoundで0から∞まで
     #catで変数の種類指定
     # 上限を指定
-    upbound = 10
+    upbound = data["up_value"]
     xs = up_limit(target_menu_list,upbound)
     #print("xs:",xs)
 
